@@ -7,4 +7,35 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <color name="blue_100">#071166</color>
+    <color name="blue_200">#0B197A</color>
+    <color name="blue_300">#122699</color>
+    <color name="blue_400">#1B33B7</color>
+    <color name="blue_500">#2545D4</color>
+    <color name="blue_600">#5873E6</color>
+    <color name="blue_700">#7A94F1</color>
+    <color name="blue_800">#A7BBFA</color>
+    <color name="blue_900">#D3DEFC</color>
+
+    <color name="orange_100">#E65100</color>
+    <color name="orange_200">#EF6C00</color>
+    <color name="orange_300">#F57C00</color>
+    <color name="orange_400">#FB8C00</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_600">#FFA726</color>
+    <color name="orange_700">#FFB74D</color>
+    <color name="orange_800">#FFCC80</color>
+    <color name="orange_900">#FFE0B2</color>
+
+    <color name="neutral_100">#1C1B1F</color>
+    <color name="neutral_200">#313033</color>
+    <color name="neutral_300">#484649</color>
+    <color name="neutral_400">#605D62</color>
+    <color name="neutral_500">#787579</color>
+    <color name="neutral_600">#939094</color>
+    <color name="neutral_700">#AEAAAE</color>
+    <color name="neutral_800">#C9C5CA</color>
+    <color name="neutral_900">#E6E1E5</color>
+
 </resources>
