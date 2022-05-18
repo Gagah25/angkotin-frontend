@@ -22,7 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -30,12 +31,14 @@
         android:layout_height="44dp"
         android:layout_marginStart="13dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/background_search"
+        android:closeIcon="@drawable/icon_close"
         android:iconifiedByDefault="false"
+        android:queryBackground="@null"
         android:queryHint="Cari di sini"
         android:searchIcon="@drawable/icon_search"
-        android:background="@drawable/background_search"
-        android:queryBackground="@null"
+        android:textDirection="ltr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,12 +46,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="42dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:listitem="@layout/item_rute_angkot_malang"/>
+        tools:listitem="@layout/item_rute_angkot_malang" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
