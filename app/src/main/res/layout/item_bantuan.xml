@@ -5,7 +5,7 @@
     android:id="@+id/card_rute"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_marginBottom="14dp"
+    android:layout_marginBottom="8dp"
     android:layout_gravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,15 +13,28 @@
         android:layout_height="wrap_content"
         android:padding="4dp">
 
-        <TextView
-            android:id="@+id/rute_angkot_malang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Body_3_Regular"
+        <ImageView
+            android:id="@+id/icon_bantuan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            tools:text="AL (Arjosari - Ladungsari)"/>
+            tools:src="@tools:sample/avatars"/>
+
+        <TextView
+            android:id="@+id/rute_angkot_malang"
+            style="@style/Body_3_Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/icon_bantuan"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="Hubungi Kami" />
 
         <ImageView
             android:id="@+id/icon_next"
