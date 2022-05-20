@@ -111,17 +111,17 @@
 
     <style name="Body_2_Open_SemiBold">
         <item name="android:fontFamily">@font/open_sans_semibold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Body_3_Open_SemiBold">
         <item name="android:fontFamily">@font/open_sans_semibold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Body_4_Open_SemiBold">
         <item name="android:fontFamily">@font/open_sans_semibold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Caption_Regular">
