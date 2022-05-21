@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <TextView
+        android:id="@+id/tv_greet"
+        style="@style/Body_1_Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/greet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        style="@style/Subtitle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        app:layout_constraintEnd_toEndOf="@+id/tv_greet"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="@+id/tv_greet"
+        app:layout_constraintTop_toBottomOf="@+id/tv_greet" />
+
+    <Button
+        android:id="@+id/btn_cari_angkot"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/blue_100"
+        android:text="@string/cari_angkot"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_angkot"
+        app:iconGravity="textTop"
+        app:iconSize="46dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
+
+    <Button
+        android:id="@+id/btn_rute_angkot"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/orange_100"
+        android:text="@string/rute_angkot"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_pinpoint"
+        app:iconGravity="textTop"
+        app:iconSize="46dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_cari_angkot"
+        app:layout_constraintStart_toEndOf="@+id/btn_cari_angkot"
+        app:layout_constraintTop_toTopOf="@+id/btn_cari_angkot"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_bantuan"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/orange_500"
+        android:text="@string/bantuan"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_headset"
+        app:iconGravity="textTop"
+        app:iconSize="46dp"
+        app:layout_constraintStart_toStartOf="@+id/btn_cari_angkot"
+        app:layout_constraintTop_toBottomOf="@+id/btn_cari_angkot"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_akunku"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/blue_500"
+        android:text="@string/akunku"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_user"
+        app:iconGravity="textTop"
+        app:iconSize="46dp"
+        app:layout_constraintStart_toEndOf="@+id/btn_bantuan"
+        app:layout_constraintTop_toBottomOf="@+id/btn_rute_angkot" />
+</androidx.constraintlayout.widget.ConstraintLayout>
