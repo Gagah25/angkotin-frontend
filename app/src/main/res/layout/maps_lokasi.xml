@@ -86,54 +86,100 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/text_pilih_angkot"
-            style="@style/Body_1_Open_SemiBold"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Pilih Angkot yang terdekat dengan lokasi kamu"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_below="@+id/text_pilih_angkot"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="25dp"
-            android:background="@color/neutral_800">
+            <TableRow>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/black"
-                android:src="@drawable/icon_pin_location" />
+                <TextView
+                    android:id="@+id/text_pilih_angkot"
+                    style="@style/Body_1_Open_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text="Pilih Angkot yang terdekat dengan lokasi kamu"
+                    android:textColor="@color/black" />
+            </TableRow>
 
-            <TextView
-                style="@style/Body_1_Medium"
+            <TableRow>
+
+                <FrameLayout
+                    android:id="@+id/lokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_below="@+id/text_pilih_angkot"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/neutral_800">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/icon_pin_location" />
+
+                    <TextView
+                        style="@style/Body_1_Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/black"
+                        tools:text="Jl.Mahakam" />
+
+                    <TextView
+                        style="@style/Body_2_Regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="38dp"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        tools:text="RT 00 RW 00, No. 20, Kec. Abcde..." />
+
+                </FrameLayout>
+            </TableRow>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="12dp"
-                android:textColor="@color/black"
-                tools:text="Jl.Mahakam" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/Body_2_Regular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="38dp"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                tools:text="RT 00 RW 00, No. 20, Kec. Abcde..." />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_button_outline"
+                    app:backgroundTint="@null"
+                    android:text="Ubah Lokasi"
+                    android:textColor="@color/blue_500"
+                    style="@style/Button_Small"/>
 
-        </FrameLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_button_fill"
+                    app:backgroundTint="@null"
+                    android:text="Naik"
+                    style="@style/Button_Small"/>
+
+            </LinearLayout>
+        </TableLayout>
 
     </RelativeLayout>
 

@@ -3,44 +3,42 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/drawable/btn_cari_angkot.xml" value="0.112" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/drawable/btn_corners_home.xml" value="0.112" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/drawable/custom_btn_bg_white.xml" value="0.103" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/drawable/custom_button.xml" value="0.1215" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/drawable/rectangle_1.xml" value="0.148" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/drawable/rounded_edittext.xml" value="0.1" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_home.xml" value="0.264" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_register.xml" value="0.264" />
-=======
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.217" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_app_bar.xml" value="0.217" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_button.xml" value="0.1835" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_button_back.xml" value="0.217" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_button_fill.xml" value="0.1835" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_search.xml" value="0.189" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_ubah_lokasi.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/ic_launcher_background.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_back.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_circle.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_close.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_close_black.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_edit.xml" value="0.217" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_pin_location.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_right.xml" value="0.246" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_rule.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_search.xml" value="0.217" />
->>>>>>> c3277caa9a0da21b4c9d5ba16d99341554ccfd00
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/icon_setting.xml" value="0.217" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/menu_setting.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/font/open_sans_semibold.xml" value="0.28958333333333336" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/activity_login.xml" value="0.19453125" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/bantuan.xml" value="0.2" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/detail_rute.xml" value="0.264" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/item_bantuan.xml" value="0.4495944380069525" />
-        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/item_detail_rute.xml" value="0.72" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/item_detail_rute.xml" value="0.2" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/item_navigasi.xml" value="0.259375" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/item_rute_angkot_malang.xml" value="0.264" />
-        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/navigasi.xml" value="0.2" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/maps_lokasi.xml" value="0.176" />
+        <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/navigasi.xml" value="0.136" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/layout/rute_angkot_malang.xml" value="0.4" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
