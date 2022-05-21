@@ -31,7 +31,6 @@
             </intent-filter>
         </activity>
 
-<<<<<<< HEAD
         <activity
             android:name=".ui.MapsActivity"
             android:exported="false" />
@@ -47,14 +46,7 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-=======
-<<<<<<< HEAD
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-=======
->>>>>>> c3277caa9a0da21b4c9d5ba16d99341554ccfd00
->>>>>>> e0058f1a421938d9e62ded2488da0e37dd38f86b
+
     </application>
 
 </manifest>
