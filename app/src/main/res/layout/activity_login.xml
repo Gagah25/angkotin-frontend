@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,19 +25,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
         android:layout_marginTop="150dp"
-        android:text="@string/email"
+        android:text="@string/nomor_handphone"
         android:textColor="@color/neutral_300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/edt_email"
+        android:id="@+id/edt_nomorHp"
         android:layout_width="344dp"
         android:layout_height="48dp"
         android:layout_marginTop="7dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="@string/example_gma"
+        android:hint="@string/_081234567890"
         android:inputType="textEmailAddress"
         android:paddingStart="7dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +54,7 @@
         android:text="@string/password"
         android:textColor="@color/neutral_300"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_nomorHp" />
 
     <EditText
         android:id="@+id/edt_password"
