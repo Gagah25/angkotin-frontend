@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Angkotin</string>
-<<<<<<< HEAD
     <string name="masuk">Masuk</string>
     <string name="email">Email</string>
     <string name="example_gma">example@gmail.com</string>
@@ -24,8 +23,18 @@
         <item>Penumpang</item>
         <item>Supir Angkot</item>
     </string-array>
-=======
-    <string name="bantuan">Bantuan</string>
     <string name="detail_rute">Detail Rute</string>
->>>>>>> c3277caa9a0da21b4c9d5ba16d99341554ccfd00
+    <string name="filter_rute">Filter Rute</string>
+    <string name="dummy_app_bar">Ivana Cajiba, Jl. Mahakam</string>
+    <string name="pilih_angkot_yang_terdekat_dengan_lokasi_kamu">Pilih Angkot yang terdekat dengan lokasi kamu</string>
+    <string name="ubah_lokasi">Ubah Lokasi</string>
+    <string name="naik">Naik</string>
+
+    <string-array name="filter_rute">
+        <item>GL</item>
+        <item>AG</item>
+        <item>AGL</item>
+        <item>LDG</item>
+        <item>GM</item>
+    </string-array>
 </resources>
