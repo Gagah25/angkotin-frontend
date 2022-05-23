@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
         android:layout_width="145dp"
         android:layout_height="56dp"
         android:layout_marginStart="141dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="30dp"
         style="@style/Headline"
         android:text="@string/daftar"
         android:textColor="@color/black"
@@ -50,20 +51,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
         android:layout_marginTop="22dp"
-        android:text="@string/nik"
+        android:text="@string/nomor_handphone"
         android:textColor="@color/neutral_300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_nama" />
 
     <EditText
-        android:id="@+id/edt_nik"
+        android:id="@+id/edt_nomorHp"
         android:layout_width="344dp"
         android:layout_height="48dp"
         android:layout_marginTop="7dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="number"
-        android:hint="@string/_0001001110001110"
+        android:hint="@string/_081234567890"
         android:paddingStart="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,20 +77,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
         android:layout_marginTop="22dp"
-        android:text="@string/email"
+        android:text="@string/password"
         android:textColor="@color/neutral_300"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_nik" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_nomorHp" />
 
     <EditText
-        android:id="@+id/edt_email_daftar"
+        android:id="@+id/edt_password_daftar"
         android:layout_width="344dp"
         android:layout_height="48dp"
         android:layout_marginTop="7dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="@string/example_gma"
+        android:hint="@string/password"
         android:paddingStart="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,26 +103,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
         android:layout_marginTop="22dp"
-        android:text="@string/password"
+        android:text="@string/konfirmasi_password"
         android:textColor="@color/neutral_300"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_email_daftar" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_password_daftar" />
 
     <EditText
-        android:id="@+id/edt_password_daftar"
+        android:id="@+id/edt_confirm_password"
         android:layout_width="344dp"
         android:layout_height="48dp"
         android:layout_marginTop="7dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:inputType="numberPassword"
-        android:hint="@string/password"
+        android:hint="@string/konfirmasi_password"
         android:paddingStart="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-
 
     <Button
         android:id="@+id/btn_daftar"
@@ -134,7 +133,7 @@
         android:text="@string/daftar"
         app:cornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_password_daftar" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_confirm_password" />
 
     <TextView
         android:id="@+id/textView6"
