@@ -11,9 +11,9 @@
         style="@style/Body_1_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
         android:layout_marginTop="100dp"
         android:text="@string/greet"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,6 @@
         android:id="@+id/btn_cari_angkot"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="36dp"
         android:layout_marginTop="80dp"
         android:backgroundTint="@color/blue_100"
         android:text="@string/cari_angkot"
@@ -40,7 +39,7 @@
         app:icon="@drawable/ic_angkot"
         app:iconGravity="textTop"
         app:iconSize="46dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_welcome"
         app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
 
     <Button
@@ -55,6 +54,7 @@
         app:iconGravity="textTop"
         app:iconSize="46dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_cari_angkot"
+        app:layout_constraintEnd_toEndOf="@+id/tv_welcome"
         app:layout_constraintStart_toEndOf="@+id/btn_cari_angkot"
         app:layout_constraintTop_toTopOf="@+id/btn_cari_angkot"
         tools:ignore="TextContrastCheck" />
@@ -86,6 +86,7 @@
         app:icon="@drawable/ic_user"
         app:iconGravity="textTop"
         app:iconSize="46dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_rute_angkot"
         app:layout_constraintStart_toEndOf="@+id/btn_bantuan"
         app:layout_constraintTop_toBottomOf="@+id/btn_rute_angkot" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,6 @@
     <string name="rute_angkot">Rute Angkot</string>
     <string name="bantuan">Bantuan</string>
     <string name="akunku">Akunku</string>
-<<<<<<< HEAD
 
     <string-array name="role">
         <item>Penumpang</item>
@@ -38,8 +37,6 @@
         <item>LDG</item>
         <item>GM</item>
     </string-array>
-=======
-    <string name="detail_rute">Detail Rute</string>
     <string name="nomor_handphone">Nomor Handphone</string>
     <string name="_081234567890">081234567890</string>
     <string name="konfirmasi_password">Konfirmasi Password</string>
@@ -47,5 +44,4 @@
     <string name="tab_text_2">Supir Angkot</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
->>>>>>> f06074ce1413c2b673ecba4c03755d8e70883f42
 </resources>
