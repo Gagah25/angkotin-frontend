@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_daftar.xml" value="0.16304347826086957" />
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_home.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_login.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/activity_main.xml" value="0.1296875" />
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/fragment_penumpang.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/fragment_supir.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/angkotin-frontend/app/src/main/res/layout/navigasi.xml" value="0.12436676798378926" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_app_bar.xml" value="0.217" />
         <entry key="..\:/Data Project (G) Back Up/Project Android/Angkotin/app/src/main/res/drawable/background_button.xml" value="0.1835" />
