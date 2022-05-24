@@ -18,6 +18,27 @@
     <string name="rute_angkot">Rute Angkot</string>
     <string name="bantuan">Bantuan</string>
     <string name="akunku">Akunku</string>
+<<<<<<< HEAD
+
+    <string-array name="role">
+        <item>Penumpang</item>
+        <item>Supir Angkot</item>
+    </string-array>
+    <string name="detail_rute">Detail Rute</string>
+    <string name="filter_rute">Filter Rute</string>
+    <string name="dummy_app_bar">Ivana Cajiba, Jl. Mahakam</string>
+    <string name="pilih_angkot_yang_terdekat_dengan_lokasi_kamu">Pilih Angkot yang terdekat dengan lokasi kamu</string>
+    <string name="ubah_lokasi">Ubah Lokasi</string>
+    <string name="naik">Naik</string>
+
+    <string-array name="filter_rute">
+        <item>GL</item>
+        <item>AG</item>
+        <item>AGL</item>
+        <item>LDG</item>
+        <item>GM</item>
+    </string-array>
+=======
     <string name="detail_rute">Detail Rute</string>
     <string name="nomor_handphone">Nomor Handphone</string>
     <string name="_081234567890">081234567890</string>
@@ -26,4 +47,5 @@
     <string name="tab_text_2">Supir Angkot</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+>>>>>>> f06074ce1413c2b673ecba4c03755d8e70883f42
 </resources>

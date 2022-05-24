@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.angkotin">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -35,6 +36,15 @@
         </activity>
         <activity
             android:name=".ui.MapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BantuanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RuteAngkotActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SettingActivity"
             android:exported="false" />
 
         <meta-data

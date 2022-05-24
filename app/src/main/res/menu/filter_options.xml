@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/trayek_gl"
+            android:title="GL"/>
+        <item android:id="@+id/trayek_ag"
+            android:title="AG"/>
+        <item android:id="@+id/trayek_agl"
+            android:title="AGL"/>
+        <item android:id="@+id/trayek_ldg"
+            android:title="LDG"/>
+        <item android:id="@+id/trayek_gm"
+            android:title="GM"/>
+    </group>
+
+</menu>
