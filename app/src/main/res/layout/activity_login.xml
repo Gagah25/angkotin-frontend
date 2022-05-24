@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/Headline"
         android:layout_width="145dp"
         android:layout_height="56dp"
-        android:layout_marginStart="141dp"
         android:layout_marginTop="84dp"
-        style="@style/Headline"
         android:text="@string/masuk"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,11 +23,11 @@
         style="@style/Body_3_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginStart="-90dp"
+        android:layout_marginTop="100dp"
         android:text="@string/nomor_handphone"
         android:textColor="@color/neutral_300"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
@@ -46,14 +46,14 @@
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/Body_3_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="22dp"
-        style="@style/Body_3_Medium"
         android:text="@string/password"
         android:textColor="@color/neutral_300"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/edt_nomorHp"
         app:layout_constraintTop_toBottomOf="@+id/edt_nomorHp" />
 
     <EditText
@@ -95,12 +95,12 @@
         style="@style/Button_Big"
         android:layout_width="344dp"
         android:layout_height="65dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="88dp"
         android:backgroundTint="@color/blue_500"
         android:text="@string/masuk"
         app:cornerRadius="100dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
     <TextView
@@ -108,10 +108,10 @@
         style="@style/Body_3_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
+        android:layout_marginStart="80dp"
         android:text="@string/belum_punya_akun"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btn_masuk"
         app:layout_constraintTop_toBottomOf="@+id/btn_masuk" />
 
     <TextView
@@ -119,10 +119,12 @@
         style="@style/Body_3_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="90dp"
         android:text="@string/daftar"
         android:textColor="@color/blue_500"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/btn_masuk"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 

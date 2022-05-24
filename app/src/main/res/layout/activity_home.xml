@@ -11,7 +11,7 @@
         style="@style/Body_1_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="88dp"
         android:text="@string/greet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,14 +79,14 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
         android:backgroundTint="@color/blue_500"
         android:text="@string/akunku"
         app:cornerRadius="20dp"
         app:icon="@drawable/ic_user"
         app:iconGravity="textTop"
         app:iconSize="46dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_bantuan"
         app:layout_constraintEnd_toEndOf="@+id/btn_rute_angkot"
         app:layout_constraintStart_toEndOf="@+id/btn_bantuan"
-        app:layout_constraintTop_toBottomOf="@+id/btn_rute_angkot" />
+        app:layout_constraintTop_toTopOf="@+id/btn_bantuan" />
 </androidx.constraintlayout.widget.ConstraintLayout>
