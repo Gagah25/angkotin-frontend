@@ -1,8 +1,10 @@
 package com.example.angkotin.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
@@ -17,49 +19,23 @@ import androidx.core.view.GravityCompat
 import com.example.angkotin.HomeActivity
 import com.example.angkotin.R
 import com.example.angkotin.databinding.MapsLokasiBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 
 
 class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: MapsLokasiBinding
     private lateinit var mMap: GoogleMap
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (!allPermissionsGranted()) {
-                Toast.makeText(
-                    this,
-                    "Tidak mendapatkan permission.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-            }
-        }
-    }
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MapsLokasiBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (!allPermissionsGranted()) {
-            ActivityCompat.requestPermissions(
-                this,
-                REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
-            )
-        }
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map_rute) as SupportMapFragment
@@ -76,7 +52,7 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
                 drawerLayout.openDrawer(GravityCompat.END)
             }
             buttonSetting.setOnClickListener { moveToSetting() }
-            buttonMyLocation.setOnClickListener { getMyLocation() }
+            buttonMyLocation.setOnClickListener { getMyLastLocation() }
         }
     }
 
@@ -90,11 +66,12 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         val kotaMalang = LatLng(-7.982929, 112.631333)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13.5f))
 
-        getMyLocation()
+        //getMyLastLocation()
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
-        private fun moveToHome(){
+    private fun moveToHome(){
         val intent = Intent(this@MapsActivity, HomeActivity::class.java)
         startActivity(intent)
         finish()
@@ -112,23 +89,63 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
 
     private val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                getMyLocation()
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    // Precise location access granted.
+                    getMyLastLocation()
+                }
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    // Only approximate location access granted.
+                    getMyLastLocation()
+                }
+                else -> {
+                    // No location access granted.
+                }
             }
         }
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
 
-    private fun getMyLocation() {
-        if (ContextCompat.checkSelfPermission(
-                this.applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
+    @SuppressLint("MissingPermission")
+    private fun getMyLastLocation() {
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
+            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
-            mMap.uiSettings.isMyLocationButtonEnabled = true
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    showStartMarker(location)
+                } else {
+                    Toast.makeText(
+                        this@MapsActivity,
+                        "Location is not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
         } else {
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
         }
+    }
+
+    private fun showStartMarker(location: Location) {
+        val startLocation = LatLng(location.latitude, location.longitude)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(startLocation)
+        )
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
     }
 
     companion object{
