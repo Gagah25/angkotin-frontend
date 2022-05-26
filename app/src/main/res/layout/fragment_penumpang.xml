@@ -1,136 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragmentDaftar.PenumpangFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/Body_3_Medium"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-290dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/nama"
-            android:textColor="@color/neutral_300"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <EditText
-            android:id="@+id/edt_nama"
-            android:layout_width="344dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="7dp"
-            android:background="@drawable/rounded_edittext"
-            android:ems="10"
-            android:hint="@string/haaland"
-            android:inputType="textPersonName"
-            android:paddingStart="7dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:ignore="TextContrastCheck"
-            android:autofillHints="name" />
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/Body_3_Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/nama"
+                android:textColor="@color/neutral_300" />
 
-        <TextView
-            android:id="@+id/textView3"
-            style="@style/Body_3_Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:text="@string/nomor_handphone"
-            android:textColor="@color/neutral_300"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/edt_nama" />
+            <EditText
+                android:id="@+id/edt_nama"
+                android:layout_width="344dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="@string/haaland"
+                android:inputType="textPersonName"
+                android:paddingStart="7dp"
+                tools:ignore="TextContrastCheck"
+                android:autofillHints="name" />
 
-        <EditText
-            android:id="@+id/edt_nomorHp"
-            android:layout_width="344dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="7dp"
-            android:autofillHints="phone"
-            android:background="@drawable/rounded_edittext"
-            android:ems="10"
-            android:hint="@string/_081234567890"
-            android:inputType="number"
-            android:paddingStart="7dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:ignore="TextContrastCheck" />
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/Body_3_Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/nik"
+                android:textColor="@color/neutral_300" />
 
-        <TextView
-            android:id="@+id/textView4"
-            style="@style/Body_3_Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:text="@string/password"
-            android:textColor="@color/neutral_300"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/edt_nomorHp" />
+            <EditText
+                android:id="@+id/edt_nik"
+                android:layout_width="344dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="7dp"
+                android:autofillHints="phone"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="@string/_0001001110001110"
+                android:inputType="number"
+                android:paddingStart="7dp"
+                tools:ignore="TextContrastCheck" />
 
-        <EditText
-            android:id="@+id/edt_password_daftar"
-            android:layout_width="344dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="7dp"
-            android:autofillHints="password"
-            android:background="@drawable/rounded_edittext"
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:paddingStart="7dp"
-            android:textColorHint="#757575"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/Body_3_Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/nomor_handphone"
+                android:textColor="@color/neutral_300" />
 
-        <Button
-            android:id="@+id/btn_daftar"
-            style="@style/Button_Big"
-            android:layout_width="344dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="40dp"
-            android:backgroundTint="@color/blue_500"
-            android:text="@string/daftar"
-            app:cornerRadius="100dp"
-            app:layout_constraintEnd_toEndOf="@+id/edt_password_daftar"
-            app:layout_constraintStart_toStartOf="@+id/edt_password_daftar"
-            app:layout_constraintTop_toBottomOf="@+id/edt_password_daftar" />
+            <EditText
+                android:id="@+id/edt_nomorHp"
+                android:layout_width="344dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="7dp"
+                android:autofillHints="phone"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="@string/_081234567890"
+                android:inputType="number"
+                android:paddingStart="7dp"
+                tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/textView6"
-            style="@style/Body_3_Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="@string/belum_punya_akun"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/btn_daftar"
-            app:layout_constraintTop_toBottomOf="@+id/btn_daftar" />
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/Body_3_Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/password"
+                android:textColor="@color/neutral_300" />
 
-        <TextView
-            android:id="@+id/link_masuk"
-            style="@style/Body_3_Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="90dp"
-            android:text="@string/masuk"
-            android:textColor="@color/blue_500"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
-            app:layout_constraintEnd_toEndOf="@+id/btn_daftar"
-            app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="@+id/textView6" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/edt_password_daftar"
+                android:layout_width="344dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="7dp"
+                android:autofillHints="password"
+                android:background="@drawable/rounded_edittext"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingStart="7dp"
+                android:textColorHint="#757575"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
-</FrameLayout>
+            <Button
+                android:id="@+id/btn_daftar"
+                style="@style/Button_Big"
+                android:layout_width="344dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="@color/blue_500"
+                android:text="@string/daftar"
+                app:cornerRadius="100dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                style="@style/Body_3_Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/belum_punya_akun"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/link_masuk"
+                style="@style/Body_3_Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/masuk"
+                android:textColor="@color/blue_500"
+                android:layout_marginBottom="100dp"/>
+        </LinearLayout>
+
+
+
+</ScrollView>
