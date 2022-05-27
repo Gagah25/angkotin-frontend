@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun moveToRuteAngkot(){
-        val intent = Intent(this@HomeActivity, RuteAngkotActivity::class.java)
+        val intent = Intent(this@HomeActivity, RouteAngkotActivity::class.java)
         startActivity(intent)
     }
 

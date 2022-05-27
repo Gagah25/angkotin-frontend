@@ -37,7 +37,10 @@
             android:name=".ui.BantuanActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RuteAngkotActivity"
+            android:name=".ui.RouteAngkotActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.DetailRouteAngkotActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SettingActivity"
