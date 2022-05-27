@@ -9,12 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.angkotin.LoginActivity
+import com.example.angkotin.ui.LoginActivity
 import com.example.angkotin.R
-import com.example.angkotin.RegisterViewModel
+import com.example.angkotin.viewModel.RegisterViewModel
 import com.example.angkotin.databinding.FragmentPenumpangBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,7 +57,8 @@ class PenumpangFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getData(){
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            RegisterViewModel::class.java)
 
         binding.apply {
             nameR = edtNama.text.toString()

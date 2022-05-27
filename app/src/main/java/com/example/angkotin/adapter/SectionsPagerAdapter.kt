@@ -1,4 +1,4 @@
-package com.example.angkotin
+package com.example.angkotin.adapter
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

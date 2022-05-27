@@ -1,14 +1,15 @@
-package com.example.angkotin
+package com.example.angkotin.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.angkotin.R
 import com.example.angkotin.databinding.ActivityLoginBinding
+import com.example.angkotin.viewModel.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -44,7 +45,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun login() {
-        loginViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            LoginViewModel::class.java)
 
         binding.apply {
             nomorHpL = edtNomorHp.text.toString()

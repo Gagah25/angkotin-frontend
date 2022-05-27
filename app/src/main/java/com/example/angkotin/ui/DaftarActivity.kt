@@ -1,11 +1,11 @@
-package com.example.angkotin
+package com.example.angkotin.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.viewpager2.widget.ViewPager2
+import com.example.angkotin.R
+import com.example.angkotin.adapter.SectionsPagerAdapter
 import com.example.angkotin.databinding.ActivityDaftarBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DaftarActivity : AppCompatActivity() {

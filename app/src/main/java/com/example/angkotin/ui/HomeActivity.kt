@@ -1,12 +1,9 @@
-package com.example.angkotin
+package com.example.angkotin.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.angkotin.databinding.ActivityHomeBinding
-import com.example.angkotin.ui.BantuanActivity
-import com.example.angkotin.ui.MapsActivity
-import com.example.angkotin.ui.RuteAngkotActivity
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding

@@ -6,17 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
-import android.view.View
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import com.example.angkotin.HomeActivity
 import com.example.angkotin.R
 import com.example.angkotin.databinding.MapsLokasiBinding
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -36,6 +31,8 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         super.onCreate(savedInstanceState)
         binding = MapsLokasiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fusedLocationClient = FusedLocationProviderClient(this)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map_rute) as SupportMapFragment
@@ -66,7 +63,7 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         val kotaMalang = LatLng(-7.982929, 112.631333)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13.5f))
 
-        //getMyLastLocation()
+        getMyLastLocation()
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
@@ -145,11 +142,6 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             MarkerOptions()
                 .position(startLocation)
         )
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
-    }
-
-    companion object{
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        private const val REQUEST_CODE_PERMISSIONS = 10
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
     }
 }
