@@ -8,6 +8,7 @@ import android.os.Looper
 import com.example.angkotin.R
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,6 +18,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 3000)
-
     }
 }

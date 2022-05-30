@@ -23,14 +23,19 @@ class RouteAngkotActivity: AppCompatActivity(), RouteAdapter.OnMoveClickListener
         for(k in list.keys) {
             angkotName.add(k)
         }
-
         showRecyclerList()
+        binding.buttonBack.setOnClickListener { moveToHome() }
     }
 
     private fun showRecyclerList() {
         binding.rvRuteAngkot.layoutManager = LinearLayoutManager(this)
         val listTrekAngkotAdapter = RouteAdapter(angkotName,this)
         binding.rvRuteAngkot.adapter = listTrekAngkotAdapter
+    }
+
+    private fun moveToHome(){
+        val mIntent = Intent(this@RouteAngkotActivity, HomeActivity::class.java)
+        startActivity(mIntent)
     }
 
     override fun onMoveItemClicked(position: Int) {

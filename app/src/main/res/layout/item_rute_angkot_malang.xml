@@ -5,8 +5,9 @@
     android:id="@+id/card_rute"
     android:layout_width="match_parent"
     android:layout_height="40dp"
+    android:layout_gravity="center"
     android:layout_marginBottom="14dp"
-    android:layout_gravity="center">
+    card_view:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,13 +16,13 @@
 
         <TextView
             android:id="@+id/rute_angkot_malang"
+            style="@style/Body_3_Regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Body_3_Regular"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            tools:text="AL (Arjosari - Ladungsari)"/>
+            tools:text="AL (Arjosari - Ladungsari)" />
 
         <ImageView
             android:id="@+id/icon_next"

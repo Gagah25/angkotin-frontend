@@ -1,16 +1,14 @@
 package com.example.angkotin
 
-import com.example.angkotin.data.LoginResponse
-import com.example.angkotin.data.RegisterResponse
+import com.example.angkotin.data.*
+import com.example.angkotin.data.UserPreference
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 object ApiConfig {
     private const val baseUrl = "https://angkotin-backend.herokuapp.com"
@@ -40,4 +38,10 @@ interface ApiInterface {
     @Headers("Content-Type: application/json")
     @POST("/auth")
     fun postLogin(@Body body: LoginResponse): Call<LoginResponse>
+
+    @GET("/passengers/{id}")
+    fun getPassenger(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): Call<PassengerResponse>
 }
