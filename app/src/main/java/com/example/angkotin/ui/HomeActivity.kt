@@ -3,17 +3,22 @@ package com.example.angkotin.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.angkotin.data.UserPreference
 import com.example.angkotin.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var sharedPref: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPref = UserPreference(this)
+
         binding.apply {
+            binding.tvGreet.text = "Halo ${sharedPref.fetchUserName()}"
             btnCariAngkot.setOnClickListener{ moveToCariAngkot() }
             btnRuteAngkot.setOnClickListener { moveToRuteAngkot() }
             btnBantuan.setOnClickListener { moveToBantuan() }
