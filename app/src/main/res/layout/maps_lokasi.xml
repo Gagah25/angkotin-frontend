@@ -26,10 +26,12 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="200dp"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
             tools:context=".ui.MapsActivity" />
 
         <RelativeLayout
@@ -73,8 +75,8 @@
                         android:ellipsize="end"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="@string/dummy_app_bar"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        tools:text="@string/dummy_app_bar" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_setting"
@@ -156,8 +158,9 @@
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:background="@drawable/background_ubah_lokasi"
-            app:layout_constraintBottom_toBottomOf="@+id/map_rute"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent">
 
             <TableLayout
@@ -172,7 +175,9 @@
                         style="@style/Body_1_Open_SemiBold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="3dip"
@@ -192,7 +197,7 @@
                         android:layout_marginEnd="25dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
-                        android:background="@color/neutral_800">
+                        android:background="@drawable/background_search">
 
                         <ImageView
                             android:layout_width="30dp"
@@ -203,23 +208,28 @@
                             android:src="@drawable/icon_pin_location" />
 
                         <TextView
+                            android:id="@+id/street"
                             style="@style/Body_1_Medium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="12dp"
+                            android:layout_marginEnd="15dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:textColor="@color/black"
                             tools:text="Jl.Mahakam" />
 
-                        <TextView
-                            style="@style/Body_2_Regular"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginTop="38dp"
-                            android:maxLines="1"
-                            android:textColor="@color/black"
-                            tools:text="RT 00 RW 00, No. 20, Kec. Abcde..." />
+                        <!--                        <TextView-->
+                        <!--                            android:id="@+id/street_detail"-->
+                        <!--                            style="@style/Body_2_Regular"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:layout_marginStart="40dp"-->
+                        <!--                            android:layout_marginTop="38dp"-->
+                        <!--                            android:maxLines="1"-->
+                        <!--                            android:textColor="@color/black"-->
+                        <!--                            tools:text="RT 00 RW 00, No. 20, Kec. Abcde..." />-->
 
                     </FrameLayout>
                 </TableRow>

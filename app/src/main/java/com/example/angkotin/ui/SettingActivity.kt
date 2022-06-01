@@ -32,6 +32,8 @@ class SettingActivity: AppCompatActivity() {
             userTelepon.text = phoneNUmber
             buttonClose.setOnClickListener{ moveToMaps() }
             keluar.setOnClickListener { logOut() }
+            ruteAngkot.setOnClickListener { moveToRuote() }
+            beranda.setOnClickListener { moveToHome() }
         }
     }
 
@@ -49,5 +51,16 @@ class SettingActivity: AppCompatActivity() {
             startActivity(Intent(this@SettingActivity, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun moveToHome(){
+        val intent = Intent(this@SettingActivity, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun moveToRuote(){
+        val intent = Intent(this@SettingActivity, RouteAngkotActivity::class.java)
+        startActivity(intent)
     }
 }

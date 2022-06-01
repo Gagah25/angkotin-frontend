@@ -41,10 +41,10 @@ data class Data(
 data class Location(
 
 	@field:SerializedName("latitude")
-	val latitude: Int? = null,
+	val latitude: Double? = null,
 
 	@field:SerializedName("longitude")
-	val longitude: Int? = null
+	val longitude: Double? = null
 )
 
 data class CreatedAt(

@@ -4,28 +4,43 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.angkotin.R
+import com.example.angkotin.data.UserPreference
 import com.example.angkotin.databinding.MapsLokasiBinding
+import com.example.angkotin.viewModel.AccountViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
+import java.util.*
 
 
 class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: MapsLokasiBinding
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var geocoder: Geocoder
+    private lateinit var viewModel: AccountViewModel
+    private lateinit var sharedPref: UserPreference
+    private lateinit var address: MutableList<android.location.Address>
+    private lateinit var token: String
+    private lateinit var idUser: String
+    private lateinit var nameUser: String
+    private var locationLong: Double = 0.0
+    private var locationLat: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +48,12 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         setContentView(binding.root)
 
         fusedLocationClient = FusedLocationProviderClient(this)
+        geocoder = Geocoder(this, Locale.getDefault())
+        sharedPref = UserPreference(this)
+        token = "Bearer ${sharedPref.fetchToken()}"
+        idUser = "${sharedPref.fetchID()}"
+        nameUser = "${sharedPref.fetchUserName()}"
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(AccountViewModel::class.java)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map_rute) as SupportMapFragment
@@ -40,6 +61,7 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
 
         binding.apply {
             navigationFilter.setNavigationItemSelectedListener(this@MapsActivity)
+            userAvatar.setImageResource(R.drawable.dummy_pic)
 
             buttonBack.setOnClickListener { moveToHome() }
             buttonFilter.setOnClickListener{
@@ -51,6 +73,7 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
         }
+        //getMyLastLocation()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -82,6 +105,11 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         TODO("Not yet implemented")
+    }
+
+    private fun getData(data: com.example.angkotin.data.Location){
+        viewModel.setDataLocation(token, idUser, data)
+
     }
 
     private val requestPermissionLauncher =
@@ -116,6 +144,22 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         ) {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                 if (location != null) {
+                    locationLat = location.latitude
+                    locationLong = location.longitude
+                    val data = com.example.angkotin.data.Location(locationLat, locationLong)
+                    Log.d("Lat", locationLat.toString())
+                    Log.d("Long", locationLong.toString())
+
+                    address = geocoder.getFromLocation(locationLat, locationLong,1)
+
+                    val alamat: String = address.get(0).getAddressLine(0)
+
+                    binding.apply {
+                        street.text = alamat
+                        userDetail.text = "${nameUser}, ${alamat}"
+                    }
+
+                    getData(data)
                     showStartMarker(location)
                 } else {
                     Toast.makeText(

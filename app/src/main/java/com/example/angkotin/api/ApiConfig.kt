@@ -3,6 +3,7 @@ package com.example.angkotin
 import com.example.angkotin.data.*
 import com.example.angkotin.data.UserPreference
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -43,5 +44,12 @@ interface ApiInterface {
     fun getPassenger(
         @Header("Authorization") token: String,
         @Path("id") id: String
+    ): Call<PassengerResponse>
+
+    @PUT("/passengers/{id}")
+    fun updateLocationUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body params: Location
     ): Call<PassengerResponse>
 }
