@@ -45,5 +45,7 @@
     <string name="tab_text_2">Supir Angkot</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="teks_warning_klik_angkot">Klik Angkot yang kamu pilih untuk melakukan perjalanan.</string>
+    <string name="oke">Oke</string>
 
 </resources>

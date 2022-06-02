@@ -2,6 +2,8 @@ package com.example.angkotin.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.usage.UsageEvents
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -9,11 +11,15 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.example.angkotin.R
 import com.example.angkotin.data.UserPreference
@@ -41,6 +47,9 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
     private lateinit var nameUser: String
     private var locationLong: Double = 0.0
     private var locationLat: Double = 0.0
+    private lateinit var dialogBuilder: AlertDialog.Builder
+    private lateinit var dialog: AlertDialog
+    private lateinit var okeButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +81,7 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             }
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
+            buttonNaik.setOnClickListener { klikAngkotDialog() }
         }
         //getMyLastLocation()
     }
@@ -188,4 +198,15 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         )
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
     }
+
+    private fun klikAngkotDialog() {
+        dialogBuilder = AlertDialog.Builder(this@MapsActivity)
+        dialogBuilder.setMessage(getString(R.string.teks_warning_klik_angkot))
+        dialogBuilder.setPositiveButton("Oke", DialogInterface.OnClickListener { dialog, id ->
+            dialog.dismiss()
+        })
+        dialog = dialogBuilder.create()
+        dialog.show()
+    }
 }
+

@@ -239,6 +239,7 @@
                     android:layout_height="wrap_content">
 
                     <Button
+                        android:id="@+id/button_ubah"
                         style="@style/Button_Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -252,6 +253,7 @@
                         app:backgroundTint="@null" />
 
                     <Button
+                        android:id="@+id/button_naik"
                         style="@style/Button_Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
