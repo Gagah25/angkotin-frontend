@@ -10,9 +10,11 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +32,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import java.util.*
 
@@ -49,7 +52,6 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
     private var locationLat: Double = 0.0
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
-    private lateinit var okeButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,18 +75,38 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             userAvatar.setImageResource(R.drawable.dummy_pic)
 
             buttonBack.setOnClickListener { moveToHome() }
-            buttonFilter.setOnClickListener{
-                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
-                    drawerLayout.closeDrawer(GravityCompat.END)
-                }
-                drawerLayout.openDrawer(GravityCompat.END)
+//            buttonFilter.setOnClickListener{
+//                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
+//                    drawerLayout.closeDrawer(GravityCompat.END)
+//                }
+//                drawerLayout.openDrawer(GravityCompat.END)
+//            }
+
+            /*POPUP MENU FILTER*/
+            buttonFilter.setOnClickListener {
+                val popupMenu: PopupMenu = PopupMenu(this@MapsActivity, buttonFilter)
+                popupMenu.menuInflater.inflate(R.menu.filter_options,popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.trayek_gl -> buttonFilter.text = "GL"
+                        R.id.trayek_ag -> buttonFilter.text = "AG"
+                        R.id.trayek_agl -> buttonFilter.text = "AGL"
+                        R.id.trayek_ldg -> buttonFilter.text = "LDG"
+                        R.id.trayek_gm -> buttonFilter.text = "GM"
+                    }
+                    true
+                })
+                popupMenu.show()
             }
+
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
             buttonNaik.setOnClickListener { klikAngkotDialog() }
         }
         //getMyLastLocation()
     }
+
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
