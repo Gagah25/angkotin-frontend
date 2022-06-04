@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.angkotin.ApiConfig
 import com.example.angkotin.data.Data
-import com.example.angkotin.data.Location
+import com.example.angkotin.data.DataLocation
 import com.example.angkotin.data.PassengerResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -33,7 +33,7 @@ class AccountViewModel: ViewModel() {
         })
     }
 
-    fun setDataLocation(token: String, id: String, data: Location){
+    fun setDataLocation(token: String, id: String, data: DataLocation){
         val client = ApiConfig.getApiService().updateLocationUser(token, id, data)
         client.enqueue(object : retrofit2.Callback<PassengerResponse>{
             override fun onResponse(

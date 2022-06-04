@@ -50,6 +50,6 @@ interface ApiInterface {
     fun updateLocationUser(
         @Header("Authorization") token: String,
         @Path("id") id: String,
-        @Body params: Location
+        @Body params: DataLocation
     ): Call<PassengerResponse>
 }

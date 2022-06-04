@@ -32,13 +32,13 @@ data class Data(
 	val name: String? = null,
 
 	@field:SerializedName("location")
-	val location: Location? = null,
+	val location: DataLocation? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null
 )
 
-data class Location(
+data class DataLocation(
 
 	@field:SerializedName("latitude")
 	val latitude: Double? = null,
