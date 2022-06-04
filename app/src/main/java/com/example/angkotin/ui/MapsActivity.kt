@@ -2,6 +2,8 @@ package com.example.angkotin.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.usage.UsageEvents
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -11,13 +13,19 @@ import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.example.angkotin.R
 import com.example.angkotin.data.DataLocation
@@ -32,6 +40,9 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
@@ -60,6 +71,8 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
     private var allLatLng = ArrayList<LatLng>()
     private var locationLong: Double = 0.0
     private var locationLat: Double = 0.0
+    private lateinit var dialogBuilder: AlertDialog.Builder
+    private lateinit var dialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,17 +102,38 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             userAvatar.setImageResource(R.drawable.dummy_pic)
 
             buttonBack.setOnClickListener { moveToHome() }
-            buttonFilter.setOnClickListener{
-                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
-                    drawerLayout.closeDrawer(GravityCompat.END)
-                }
-                drawerLayout.openDrawer(GravityCompat.END)
+//            buttonFilter.setOnClickListener{
+//                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
+//                    drawerLayout.closeDrawer(GravityCompat.END)
+//                }
+//                drawerLayout.openDrawer(GravityCompat.END)
+//            }
+
+            /*POPUP MENU FILTER*/
+            buttonFilter.setOnClickListener {
+                val popupMenu: PopupMenu = PopupMenu(this@MapsActivity, buttonFilter)
+                popupMenu.menuInflater.inflate(R.menu.filter_options,popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.trayek_gl -> buttonFilter.text = "GL"
+                        R.id.trayek_ag -> buttonFilter.text = "AG"
+                        R.id.trayek_agl -> buttonFilter.text = "AGL"
+                        R.id.trayek_ldg -> buttonFilter.text = "LDG"
+                        R.id.trayek_gm -> buttonFilter.text = "GM"
+                    }
+                    true
+                })
+                popupMenu.show()
             }
+
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
             buttonUbah.setOnClickListener {  }
+            buttonNaik.setOnClickListener { klikAngkotDialog() }
         }
     }
+
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -227,4 +261,16 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         finish()
         return true
     }
+
+    private fun klikAngkotDialog() {
+        dialogBuilder = AlertDialog.Builder(this@MapsActivity)
+        dialogBuilder.setMessage(getString(R.string.teks_warning_klik_angkot))
+        dialogBuilder.setPositiveButton("Oke", DialogInterface.OnClickListener { dialog, id ->
+            dialog.dismiss()
+        })
+        dialog = dialogBuilder.create()
+        dialog.show()
+    }
 }
+
+
