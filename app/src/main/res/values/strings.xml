@@ -47,5 +47,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="teks_warning_klik_angkot">Klik Angkot yang kamu pilih untuk melakukan perjalanan.</string>
     <string name="oke">Oke</string>
+    <string name="lihat_rute">Lihat Rute</string>
+    <string name="nomor_plat">Nomor Plat</string>
+    <string name="kode_angkot">Kode Angkot</string>
+    <string name="tujuan_akhir">Tujuan Akhir</string>
+    <string name="jarak_ke_lokasimu">Jarak ke lokasimu</string>
+    <string name="estimasi_waktu_sampai">Estimasi waktu sampai</string>
+    <string name="_0_5_km">0.5 Km</string>
 
 </resources>
