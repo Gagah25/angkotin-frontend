@@ -1,51 +1,59 @@
 package com.example.angkotin.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.angkotin.data.DataLocation
-import com.google.android.gms.maps.model.LatLng
+import com.example.angkotin.data.DriverData
+import com.example.angkotin.data.DriverLocation
+import com.example.angkotin.data.DriverResponse
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.collections.ArrayList
 
 class MapViewModel: ViewModel() {
-    private val dataLoc = MutableLiveData<ArrayList<Double>>()
-    private val location: LiveData<ArrayList<Double>> = dataLoc
-    val angkotCollectionRef = FirebaseFirestore.getInstance().collection("users")
+    private val dataLoc = MutableLiveData<ArrayList<DriverResponse>>()
+    private val location: LiveData<ArrayList<DriverResponse>> = dataLoc
+
+    val angkotDb = FirebaseFirestore.getInstance()
+    val colRef = angkotDb.collection("users")
 
     fun setDataFirebase(){
-        var lat: Any?
-        var lon: Any?
-        var tempLat = ArrayList<Double>()
-        var tempLon = ArrayList<Double>()
-        angkotCollectionRef.addSnapshotListener{ querySnapshot, firebaseFirestoreException ->
-            firebaseFirestoreException?.let { document ->
+        val driverList = ArrayList<DriverResponse>()
+        colRef.addSnapshotListener { value, error ->
+            error?.let { doc ->
                 return@addSnapshotListener
             }
-            querySnapshot?.let {
-                val sb = StringBuilder()
-                for (document in it){
-                    val angkot = document.data.get("location") as Map<*,*>
-                    lat = angkot["latitude"]
-                    if (lat is Any){
-                        tempLat = arrayListOf(lat.toString().toDouble())
+            value?.let {
+                for (doc in it) {
+                    if (doc != null) {
+                        val angkot = doc.toObject(DriverResponse::class.java)
+                        val latitude = angkot.location?.latitude
+                        val longitude = angkot.location?.longitude
+                        val angkotNumber = angkot.driverMeta?.angkotNumber
+                        val isActive = angkot.driverMeta?.isActive
+                        driverList.add(
+                            DriverResponse(
+                                driverMeta = DriverData(
+                                    angkotNumber = angkotNumber,
+                                    isActive = isActive
+                                ),
+                                location = DriverLocation(
+                                    latitude = latitude,
+                                    longitude = longitude
+                                ),
+                                name = angkot.name,
+                                nik = angkot.nik,
+                                phoneNumber = angkot.phoneNumber,
+                                role = angkot.role
+                            )
+                        )
                     }
-                    lon = angkot["longitude"]
-                    if (lon is Any){
-                        tempLon = arrayListOf(lon.toString().toDouble())
-                    }
-                    Log.d("Firebase Lat", lat.toString())
-                    Log.d("Firebase Lon", lon.toString())
+                    dataLoc.value = driverList
                 }
-                for (i in tempLat.indices){
-
-                }
-
             }
         }
     }
 
-    fun getDataFirebase():LiveData<ArrayList<Double>>{
+    fun getDataFirebase():LiveData<ArrayList<DriverResponse>>{
         return location
     }
 }

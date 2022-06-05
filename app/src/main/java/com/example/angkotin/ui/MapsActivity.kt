@@ -2,55 +2,42 @@ package com.example.angkotin.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.usage.UsageEvents
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
-import androidx.lifecycle.Lifecycle
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.angkotin.R
 import com.example.angkotin.data.DataLocation
-import com.example.angkotin.data.PassengerResponse
 import com.example.angkotin.data.UserPreference
 import com.example.angkotin.databinding.MapsLokasiBinding
-import com.example.angkotin.firebase.FirebaseUtils
 import com.example.angkotin.viewModel.AccountViewModel
 import com.example.angkotin.viewModel.MapViewModel
-import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.FirebaseApp
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
@@ -68,11 +55,12 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
     private lateinit var idUser: String
     private lateinit var nameUser: String
     private lateinit var passREsponse: DataLocation
-    private var allLatLng = ArrayList<LatLng>()
     private var locationLong: Double = 0.0
     private var locationLat: Double = 0.0
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var dialog: AlertDialog
+    private var markerDriver: Marker? = null
+    private var markerPassenger: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,13 +90,6 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             userAvatar.setImageResource(R.drawable.dummy_pic)
 
             buttonBack.setOnClickListener { moveToHome() }
-//            buttonFilter.setOnClickListener{
-//                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
-//                    drawerLayout.closeDrawer(GravityCompat.END)
-//                }
-//                drawerLayout.openDrawer(GravityCompat.END)
-//            }
-
             /*POPUP MENU FILTER*/
             buttonFilter.setOnClickListener {
                 val popupMenu: PopupMenu = PopupMenu(this@MapsActivity, buttonFilter)
@@ -144,11 +125,26 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
 
         val kotaMalang = LatLng(-7.982929, 112.631333)
 
-        mMap.setOnMarkerClickListener(this)
-        mMap.addMarker(MarkerOptions().position(kotaMalang).title("angkot"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13.5f))
 
         //getMyLastLocation()
+        mapViewModel.getDataFirebase().observe(this,{
+            Log.d("MapViewModel", mapViewModel.getDataFirebase().value.toString())
+            for (angkot in mapViewModel.getDataFirebase().value!!) {
+                val dataLocation = LatLng(
+                    angkot.location?.latitude!!,
+                    angkot.location?.longitude!!
+                )
+                if (angkot.role == "driver") {
+                    markerDriver = mMap.addMarker(MarkerOptions().position(dataLocation).title(angkot.name).icon(vectorToBitmap(R.drawable.direction_bus)))
+                    markerDriver?.tag = 0
+                } else if (angkot.role == "passanger") {
+                    markerPassenger = mMap.addMarker(MarkerOptions().position(dataLocation))
+                    markerPassenger?.tag = 0
+                }
+//                mMap.setOnMarkerClickListener(this)
+            }
+        })
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
@@ -248,18 +244,36 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             MarkerOptions()
                 .position(startLocation)
         )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
     }
 
-    companion object {
-        private const val TAG = "MapsActivity"
+    private fun vectorToBitmap(@DrawableRes id: Int): BitmapDescriptor {
+        val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
+        if (vectorDrawable == null) {
+            Log.e("BitmapHelper", "Resource not found")
+            return BitmapDescriptorFactory.defaultMarker()
+        }
+        val bitmap = Bitmap.createBitmap(
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
-        return true
+        val clickCount = marker.tag as? Int
+        clickCount?.let {
+            val newClickCount = it + 1
+            marker.tag = newClickCount
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        return false
     }
 
     private fun klikAngkotDialog() {
