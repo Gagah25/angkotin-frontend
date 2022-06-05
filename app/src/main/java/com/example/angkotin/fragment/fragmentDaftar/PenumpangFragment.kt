@@ -1,4 +1,4 @@
-package com.example.angkotin.fragmentDaftar
+package com.example.angkotin.fragment.fragmentDaftar
 
 import android.content.Context
 import android.content.Intent

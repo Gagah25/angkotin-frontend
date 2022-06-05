@@ -13,6 +13,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,13 +24,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.example.angkotin.R
 import com.example.angkotin.data.DataLocation
 import com.example.angkotin.data.UserPreference
 import com.example.angkotin.databinding.MapsLokasiBinding
+import com.example.angkotin.fragment.fragmentSearch.SearchPageFragment
 import com.example.angkotin.viewModel.AccountViewModel
 import com.example.angkotin.viewModel.MapViewModel
+import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.SupportMapFragment
@@ -86,35 +91,16 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         mapFragment.getMapAsync(this)
 
         binding.apply {
-            navigationFilter.setNavigationItemSelectedListener(this@MapsActivity)
             userAvatar.setImageResource(R.drawable.dummy_pic)
-
             buttonBack.setOnClickListener { moveToHome() }
-            /*POPUP MENU FILTER*/
-            buttonFilter.setOnClickListener {
-                val popupMenu: PopupMenu = PopupMenu(this@MapsActivity, buttonFilter)
-                popupMenu.menuInflater.inflate(R.menu.filter_options,popupMenu.menu)
-                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                    when(item.itemId) {
-                        R.id.trayek_gl -> buttonFilter.text = "GL"
-                        R.id.trayek_ag -> buttonFilter.text = "AG"
-                        R.id.trayek_agl -> buttonFilter.text = "AGL"
-                        R.id.trayek_ldg -> buttonFilter.text = "LDG"
-                        R.id.trayek_gm -> buttonFilter.text = "GM"
-                    }
-                    true
-                })
-                popupMenu.show()
-            }
-
+            buttonFilter.setOnClickListener { popUpMenu() }
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
-            buttonUbah.setOnClickListener {  }
+            //buttonUbah.setOnClickListener { moveToSearchPage() }
             buttonNaik.setOnClickListener { klikAngkotDialog() }
         }
+
     }
-
-
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -153,6 +139,22 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
         val intent = Intent(this@MapsActivity, HomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun popUpMenu() {
+        val popupMenu: PopupMenu = PopupMenu(this@MapsActivity, binding.buttonFilter)
+        popupMenu.menuInflater.inflate(R.menu.filter_options,popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+            when(item.itemId) {
+                R.id.trayek_gl -> binding.buttonFilter.text = "GL"
+                R.id.trayek_ag -> binding.buttonFilter.text = "AG"
+                R.id.trayek_agl -> binding.buttonFilter.text = "AGL"
+                R.id.trayek_ldg -> binding.buttonFilter.text = "LDG"
+                R.id.trayek_gm -> binding.buttonFilter.text = "GM"
+            }
+            true
+        })
+        popupMenu.show()
     }
 
     private fun moveToSetting(){
@@ -274,6 +276,14 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNa
             finish()
         }
         return false
+    }
+
+    private fun moveToSearchPage(){
+//        val mMoveToSearchPage = SearchPageFragment()
+//        val mFragmentManager = supportFragmentManager
+//        mFragmentManager.commit {
+//            .replace(R.id.search_page, mMoveToSearchPage, SearchPageFragment::class.java)
+//        }
     }
 
     private fun klikAngkotDialog() {

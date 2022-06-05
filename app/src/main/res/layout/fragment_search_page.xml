@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.fragmentSearch.SearchPageFragment"
+    android:id="@+id/search_page">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/background_button_back"
+        android:shadowRadius="8"
+        app:backgroundTint="@null"
+        app:icon="@drawable/icon_back"
+        app:iconGravity="textStart"
+        app:iconPadding="@null"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <SearchView
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/background_search"
+        android:closeIcon="@drawable/icon_close"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@null"
+        android:queryHint="Cari di sini"
+        android:searchIcon="@drawable/icon_search"
+        android:textDirection="ltr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_back"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_filter"
+        style="@style/Body_4_Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/background_button_filter"
+        android:text="@string/pilih_di_peta"
+        android:textColor="@color/black"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_maps"
+        app:iconSize="20dp"
+        app:iconGravity="textStart"
+        app:iconPadding="5dp"
+        app:iconTint="@color/neutral_100"
+        app:layout_constraintStart_toStartOf="@+id/button_back"
+        app:layout_constraintTop_toBottomOf="@+id/button_back" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:openDrawer="start">
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        app:headerLayout="@layout/nav_header_bar"
-        app:itemTextColor="@color/neutral_400"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/filter_options" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

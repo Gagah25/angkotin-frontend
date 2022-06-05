@@ -1,4 +1,4 @@
-package com.example.angkotin.fragmentDaftar
+package com.example.angkotin.fragment.fragmentDaftar
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -3,8 +3,8 @@ package com.example.angkotin.adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.angkotin.fragmentDaftar.PenumpangFragment
-import com.example.angkotin.fragmentDaftar.SupirFragment
+import com.example.angkotin.fragment.fragmentDaftar.PenumpangFragment
+import com.example.angkotin.fragment.fragmentDaftar.SupirFragment
 
 class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
