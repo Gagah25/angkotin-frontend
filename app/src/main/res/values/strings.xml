@@ -52,7 +52,8 @@
     <string name="kode_angkot">Kode Angkot</string>
     <string name="tujuan_akhir">Tujuan Akhir</string>
     <string name="jarak_ke_lokasimu">Jarak ke lokasimu</string>
-    <string name="estimasi_waktu_sampai">Estimasi waktu sampai</string>
+    <string name="estimasi_waktu">Estimasi waktu</string>
     <string name="_0_5_km">0.5 Km</string>
+    <string name="pilih_di_peta">Pilih di peta</string>
 
 </resources>

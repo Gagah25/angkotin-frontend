@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragmentProfilDriver.ProfilDriverFragment">
+    tools:context=".fragment.fragmentProfilDriver.ProfilDriverFragment">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -19,7 +19,9 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="25dp"
+            android:padding="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:stretchColumns="1"
             android:background="@drawable/background_profil_driver">
 
@@ -46,7 +48,8 @@
                     tools:text="Ben Parker, 45" />
             </TableRow>
 
-            <TableRow android:layout_marginTop="20dp">
+            <TableRow
+                android:layout_marginTop="20dp">
 
                 <TextView
                     style="@style/Body_4_Open_Regular"
@@ -91,7 +94,6 @@
                     style="@style/Body_3_Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     tools:text="Landungsari" />
             </TableRow>
 
@@ -108,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="30dp"
-                    android:text="@string/estimasi_waktu_sampai" />
+                    android:text="@string/estimasi_waktu" />
             </TableRow>
 
             <TableRow>
