@@ -1,4 +1,4 @@
-package com.example.angkotin.fragmentMap
+package com.example.angkotin.fragment.fragmentMap
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -23,7 +23,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.angkotin.R
 import com.example.angkotin.data.DataLocation
