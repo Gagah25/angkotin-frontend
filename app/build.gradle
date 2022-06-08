@@ -71,4 +71,5 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:30.0.1')
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'androidx.fragment:fragment:1.4.1'
 }

@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/profilDriverFragment"
-        android:name="com.example.angkotin.fragmentProfilDriver.ProfilDriverFragment"
+        android:name="com.example.angkotin.fragment.fragmentProfilDriver.ProfilDriverFragment"
         android:label="fragment_profil_driver"
         tools:layout="@layout/fragment_profil_driver" />
 </navigation>

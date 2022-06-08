@@ -77,6 +77,7 @@
             <TableRow>
 
                 <TextView
+                    android:id="@+id/tv_plat"
                     style="@style/Body_3_Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

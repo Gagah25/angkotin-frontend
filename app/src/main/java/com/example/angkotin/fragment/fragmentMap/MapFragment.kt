@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.angkotin.R
@@ -32,6 +33,7 @@ import com.example.angkotin.ui.HomeActivity
 import com.example.angkotin.ui.SettingActivity
 import com.example.angkotin.viewModel.AccountViewModel
 import com.example.angkotin.viewModel.MapViewModel
+import com.example.angkotin.viewModel.SharedViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -40,6 +42,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -50,6 +53,8 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var geocoder: Geocoder
     private lateinit var viewModel: AccountViewModel
     private lateinit var mapViewModel: MapViewModel
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val data = HashMap<Marker, String>()
     private lateinit var sharedPref: UserPreference
     private lateinit var address: MutableList<android.location.Address>
     private lateinit var token: String
@@ -62,6 +67,8 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var dialog: AlertDialog
     private var markerDriver: Marker? = null
     private var markerPassenger: Marker? = null
+    private var driverName: String? = null
+    private var driverClicked: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -122,7 +129,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         binding.apply {
             buttonUbah.setOnClickListener {
-                view.findNavController().navigate(R.id.action_mapFragment_to_profilDriverFragment)
+
             }
         }
     }
@@ -140,20 +147,22 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         //getMyLastLocation()
         mapViewModel.getDataFirebase().observe(viewLifecycleOwner,{
-            Log.d("MapViewModel", mapViewModel.getDataFirebase().value.toString())
+
             for (angkot in mapViewModel.getDataFirebase().value!!) {
                 val dataLocation = LatLng(
                     angkot.location?.latitude!!,
                     angkot.location?.longitude!!
                 )
                 if (angkot.role == "driver") {
-                    markerDriver = mMap.addMarker(MarkerOptions().position(dataLocation).title(angkot.name).icon(vectorToBitmap(R.drawable.direction_bus)))
+                    driverName = angkot.name
+                    markerDriver = mMap.addMarker(MarkerOptions().position(dataLocation).title(driverName).icon(vectorToBitmap(R.drawable.direction_bus)))
                     markerDriver?.tag = 0
+
                 } else if (angkot.role == "passanger") {
                     markerPassenger = mMap.addMarker(MarkerOptions().position(dataLocation))
                     markerPassenger?.tag = 0
                 }
-//                mMap.setOnMarkerClickListener(this)
+                mMap.setOnMarkerClickListener(this)
             }
         })
 
@@ -270,12 +279,11 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val clickCount = marker.tag as? Int
+        sharedViewModel.setNameDriver(marker.title.toString())
+        view?.findNavController()?.navigate(R.id.action_mapFragment_to_profilDriverFragment)
         clickCount?.let {
             val newClickCount = it + 1
             marker.tag = newClickCount
-            val intent = Intent(requireActivity(), HomeActivity::class.java)
-            startActivity(intent)
-
         }
         return false
     }
@@ -288,5 +296,9 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         })
         dialog = dialogBuilder.create()
         dialog.show()
+    }
+
+    companion object{
+        const val EXTRA_NAME = "Extra_Name"
     }
 }

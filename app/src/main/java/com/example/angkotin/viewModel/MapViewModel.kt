@@ -14,7 +14,7 @@ class MapViewModel: ViewModel() {
     private val location: LiveData<ArrayList<DriverResponse>> = dataLoc
 
     val angkotDb = FirebaseFirestore.getInstance()
-    val colRef = angkotDb.collection("users")
+    val colRef = angkotDb.collection(   "users")
 
     fun setDataFirebase(){
         val driverList = ArrayList<DriverResponse>()
