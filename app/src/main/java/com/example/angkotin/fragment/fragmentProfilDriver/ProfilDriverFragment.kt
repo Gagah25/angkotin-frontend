@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.example.angkotin.R
 import com.example.angkotin.databinding.FragmentProfilDriverBinding
 import com.example.angkotin.fragment.fragmentMap.MapFragment
 import com.example.angkotin.viewModel.MapViewModel
@@ -51,6 +53,10 @@ class ProfilDriverFragment : Fragment(){
                 }
             }
         })
+
+        binding.buttonLihatRute.setOnClickListener {
+            view.findNavController().navigate(R.id.action_profilDriverFragment_to_ruteSpesifikFragment)
+        }
     }
 
     override fun onDestroy() {

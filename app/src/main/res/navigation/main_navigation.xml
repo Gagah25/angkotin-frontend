@@ -16,5 +16,14 @@
         android:id="@+id/profilDriverFragment"
         android:name="com.example.angkotin.fragment.fragmentProfilDriver.ProfilDriverFragment"
         android:label="fragment_profil_driver"
-        tools:layout="@layout/fragment_profil_driver" />
+        tools:layout="@layout/fragment_profil_driver" >
+        <action
+            android:id="@+id/action_profilDriverFragment_to_ruteSpesifikFragment"
+            app:destination="@id/ruteSpesifikFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ruteSpesifikFragment"
+        android:name="com.example.angkotin.fragment.fragmentRuteSpesifik.RuteSpesifikFragment"
+        android:label="fragment_rute_spesifik"
+        tools:layout="@layout/fragment_rute_spesifik" />
 </navigation>
