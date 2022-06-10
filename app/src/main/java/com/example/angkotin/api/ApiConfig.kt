@@ -74,6 +74,7 @@ interface ApiDirectionService {
     fun getDirection(
         @Query("origin") origin: String,
         @Query("destination") destination: String,
+        @Query("units") units: String,
         @Query("mode") mode: String,
         @Query("key") key: String
     ): Call<DirectionsResponse>

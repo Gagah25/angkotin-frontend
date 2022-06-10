@@ -86,7 +86,7 @@ class PenumpangFragment : Fragment(), View.OnClickListener {
                     val mIntent = Intent(requireActivity(), LoginActivity::class.java)
                     startActivity(mIntent)
                 }
-            }else{
+            }else if(err == "false"){
                 Toast.makeText(activity, "Gagal Daftar", Toast.LENGTH_LONG).show()
             }
         })

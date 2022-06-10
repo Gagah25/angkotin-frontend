@@ -127,7 +127,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
             buttonUbah.setOnClickListener {  }
-            buttonNaik.setOnClickListener { klikAngkotDialog() }
+            buttonNaik.setOnClickListener {  }
         }
 
         binding.apply {
@@ -135,6 +135,11 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        klikAngkotDialog()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -145,8 +150,8 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         mMap.uiSettings.isMapToolbarEnabled = true
 
         val kotaMalang = LatLng(-7.982929, 112.631333)
-        val origin = LatLng(-7.934936,112.658867)
-        val destination = LatLng(-8.016465,112.627314)
+        val origin = LatLng(-7.9332112970817095, 112.65815130110964)
+        val destination = LatLng(-8.022991852006383, 112.62826139250069)
 
         val fromOrigin = origin.latitude.toString() + "," + origin.longitude.toString()
         val toDestination = destination.latitude.toString() + "," + destination.longitude.toString()

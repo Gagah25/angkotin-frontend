@@ -3,9 +3,11 @@ package com.example.angkotin.viewModel
 import android.app.Application
 import android.content.Context
 import android.graphics.Point
+import android.util.Log
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.angkotin.ApiConfig
 import com.example.angkotin.BuildConfig.MAPS_API_KEY
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
+import com.google.maps.android.SphericalUtil
 import retrofit2.Call
 import retrofit2.Response
 
@@ -28,11 +31,12 @@ import retrofit2.Response
 class DirectionViewModel(application: Application) : AndroidViewModel(application) {
     var points = ArrayList<LatLng>()
     var polyLineOptions: PolylineOptions? = null
+    val _dataDistance = MutableLiveData<Double>()
     private val context = getApplication<Application>().applicationContext
 
     fun setDirectionMap(fromOrigin: String, toDestination: String, mode: String, origin: LatLng, destination: LatLng, mMap: GoogleMap){
 
-        val client = ApiConfig.getApiDirectionsService().getDirection(fromOrigin, toDestination, mode, "${MAPS_API_KEY}")
+        val client = ApiConfig.getApiDirectionsService().getDirection(fromOrigin, toDestination,"metric", mode, "${MAPS_API_KEY}")
          client.enqueue(object : retrofit2.Callback<DirectionsResponse>{
             override fun onResponse(
                 call: Call<DirectionsResponse>,
@@ -43,7 +47,6 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
                     if (status.equals("OK")){
                         val routes: List<RoutesItem?>? = response.body()?.routes
 
-
                         for (i in routes?.indices!!){
                             points = ArrayList()
                             polyLineOptions = PolylineOptions()
@@ -51,6 +54,8 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
 
                             for (j in legs?.indices!!){
                                 var steps: List<StepsItem?>? = legs.get(j)?.steps
+                                var distanceAPI = legs[j]?.distance?.text?.take(4)?.toDouble()
+                                Log.d("Jarak", distanceAPI.toString())
 
                                 for (k in steps?.indices!!){
                                     var polyLine: String? = steps.get(k)?.polyline?.points
@@ -77,8 +82,7 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
                     val point = Point()
                     val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
                     windowManager?.defaultDisplay?.getSize(point)
-                    mMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, point.x, 150, 30));
-
+                    mMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, point.x, 150, 30))
                 }
             }
 
@@ -87,5 +91,9 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
             }
 
         })
+    }
+
+    fun getDistance():LiveData<Double>{
+        return _dataDistance
     }
 }
