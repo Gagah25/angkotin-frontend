@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
@@ -56,7 +57,6 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var mapViewModel: MapViewModel
     private lateinit var directionViewModel: DirectionViewModel
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val data = HashMap<Marker, String>()
     private lateinit var sharedPref: UserPreference
     private lateinit var address: MutableList<Address>
     private lateinit var token: String
@@ -70,7 +70,8 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private var markerDriver: Marker? = null
     private var markerPassenger: Marker? = null
     private var driverName: String? = null
-    private var driverClicked: String? = null
+    private lateinit var nameToAlertDialog: String
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
@@ -316,6 +317,17 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             .setView(mDialogView)
             .setTitle("Profil Supir Angkot")
         val mAlertDialog = mBuilder.show()
+        nameToAlertDialog = sharedViewModel.getNameDriver().value.toString()
+
+        mapViewModel.getDataFirebase().observe(viewLifecycleOwner,{
+            for (angkot in mapViewModel.getDataFirebase().value!!){
+                if (nameToAlertDialog == angkot.name){
+                    mDialogView.findViewById<TextView>(R.id.user_detail).text = angkot.name
+                    mDialogView.findViewById<TextView>(R.id.tv_plat).text = angkot.driverMeta?.angkotNumber
+                }
+            }
+        })
+
         mDialogView.findViewById<Button>(R.id.button_batal).setOnClickListener {
             mAlertDialog.dismiss()
         }
