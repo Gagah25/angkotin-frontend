@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_mapFragment_to_profilDriverFragment"
             app:destination="@id/profilDriverFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_searchPageFragment"
+            app:destination="@id/searchPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/profilDriverFragment"
@@ -26,4 +29,13 @@
         android:name="com.example.angkotin.fragment.fragmentRuteSpesifik.RuteSpesifikFragment"
         android:label="fragment_rute_spesifik"
         tools:layout="@layout/fragment_rute_spesifik" />
+    <fragment
+        android:id="@+id/searchPageFragment"
+        android:name="com.example.angkotin.fragment.fragmentSearch.SearchPageFragment"
+        android:label="fragment_search_page"
+        tools:layout="@layout/fragment_search_page" >
+        <action
+            android:id="@+id/action_searchPageFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
 </navigation>

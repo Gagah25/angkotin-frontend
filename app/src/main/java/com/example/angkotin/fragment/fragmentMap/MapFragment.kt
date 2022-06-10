@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,7 +46,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import java.util.*
 
-
 class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
@@ -72,11 +72,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private var driverName: String? = null
     private var driverClicked: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -127,13 +123,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
             buttonUbah.setOnClickListener {  }
-            buttonNaik.setOnClickListener {  }
-        }
-
-        binding.apply {
-            buttonUbah.setOnClickListener {
-
-            }
+            buttonUbah.setOnClickListener { moveToSearchPage() }
         }
     }
 
@@ -182,6 +172,9 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
+
+
+
     private fun moveToHome(){
         val intent = Intent(requireActivity(), HomeActivity::class.java)
         startActivity(intent)
@@ -195,6 +188,10 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private fun getData(data: DataLocation){
         viewModel.setDataLocation(token, idUser, data)
 
+    }
+
+    private fun moveToSearchPage() {
+        view?.findNavController()?.navigate(R.id.action_mapFragment_to_searchPageFragment)
     }
 
     private val requestPermissionLauncher =
@@ -294,7 +291,8 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     override fun onMarkerClick(marker: Marker): Boolean {
         val clickCount = marker.tag as? Int
         sharedViewModel.setNameDriver(marker.title.toString())
-        view?.findNavController()?.navigate(R.id.action_mapFragment_to_profilDriverFragment)
+        dialogProfileDriver()
+        //view?.findNavController()?.navigate(R.id.action_mapFragment_to_profilDriverFragment)
         clickCount?.let {
             val newClickCount = it + 1
             marker.tag = newClickCount
@@ -310,6 +308,17 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         })
         dialog = dialogBuilder.create()
         dialog.show()
+    }
+
+    private fun dialogProfileDriver() {
+        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog_profile_driver, null)
+        val mBuilder = AlertDialog.Builder(requireContext())
+            .setView(mDialogView)
+            .setTitle("Profil Supir Angkot")
+        val mAlertDialog = mBuilder.show()
+        mDialogView.findViewById<Button>(R.id.button_batal).setOnClickListener {
+            mAlertDialog.dismiss()
+        }
     }
 
     companion object{
