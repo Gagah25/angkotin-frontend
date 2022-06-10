@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
@@ -32,6 +33,7 @@ import com.example.angkotin.databinding.FragmentMapsBinding
 import com.example.angkotin.ui.HomeActivity
 import com.example.angkotin.ui.SettingActivity
 import com.example.angkotin.viewModel.AccountViewModel
+import com.example.angkotin.viewModel.DirectionViewModel
 import com.example.angkotin.viewModel.MapViewModel
 import com.example.angkotin.viewModel.SharedViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -42,7 +44,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -53,10 +54,11 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var geocoder: Geocoder
     private lateinit var viewModel: AccountViewModel
     private lateinit var mapViewModel: MapViewModel
+    private lateinit var directionViewModel: DirectionViewModel
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val data = HashMap<Marker, String>()
     private lateinit var sharedPref: UserPreference
-    private lateinit var address: MutableList<android.location.Address>
+    private lateinit var address: MutableList<Address>
     private lateinit var token: String
     private lateinit var idUser: String
     private lateinit var nameUser: String
@@ -94,6 +96,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(AccountViewModel::class.java)
         mapViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MapViewModel::class.java)
+        directionViewModel = ViewModelProvider(this).get(DirectionViewModel::class.java)
 
         mapViewModel.setDataFirebase()
 
@@ -142,9 +145,15 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         mMap.uiSettings.isMapToolbarEnabled = true
 
         val kotaMalang = LatLng(-7.982929, 112.631333)
+        val origin = LatLng(-7.934936,112.658867)
+        val destination = LatLng(-8.016465,112.627314)
+
+        val fromOrigin = origin.latitude.toString() + "," + origin.longitude.toString()
+        val toDestination = destination.latitude.toString() + "," + destination.longitude.toString()
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13.5f))
 
+        directionViewModel.setDirectionMap(fromOrigin,toDestination,"driving",origin,destination,mMap)
         //getMyLastLocation()
         mapViewModel.getDataFirebase().observe(viewLifecycleOwner,{
 
@@ -178,7 +187,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         startActivity(intent)
     }
 
-    private fun getData(data: com.example.angkotin.data.DataLocation){
+    private fun getData(data: DataLocation){
         viewModel.setDataLocation(token, idUser, data)
 
     }
@@ -217,7 +226,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                 if (location != null) {
                     locationLat = location.latitude
                     locationLong = location.longitude
-                    val data = com.example.angkotin.data.DataLocation(locationLat, locationLong)
+                    val data = DataLocation(locationLat, locationLong)
                     Log.d("Lat", locationLat.toString())
                     Log.d("Long", locationLong.toString())
 

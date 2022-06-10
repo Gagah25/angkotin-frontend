@@ -1,9 +1,8 @@
 package com.example.angkotin
 
 import com.example.angkotin.data.*
-import com.example.angkotin.data.UserPreference
+import com.google.android.gms.maps.model.LatLng
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -13,6 +12,7 @@ import retrofit2.http.*
 
 object ApiConfig {
     private const val baseUrl = "https://angkotin-backend.herokuapp.com"
+    private const val directionsUrl = "https://maps.googleapis.com"
 
     fun getApiService(): ApiInterface {
         val loggingInterceptor =
@@ -27,6 +27,21 @@ object ApiConfig {
             .client(client)
             .build()
         return retrofit.create(ApiInterface::class.java)
+    }
+
+    fun getApiDirectionsService(): ApiDirectionService{
+        val loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(directionsUrl)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+        return retrofit.create(ApiDirectionService::class.java)
     }
 
 }
@@ -52,4 +67,14 @@ interface ApiInterface {
         @Path("id") id: String,
         @Body params: DataLocation
     ): Call<PassengerResponse>
+}
+
+interface ApiDirectionService {
+    @GET("/maps/api/directions/json")
+    fun getDirection(
+        @Query("origin") origin: String,
+        @Query("destination") destination: String,
+        @Query("mode") mode: String,
+        @Query("key") key: String
+    ): Call<DirectionsResponse>
 }

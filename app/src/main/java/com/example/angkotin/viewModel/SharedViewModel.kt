@@ -15,5 +15,4 @@ class SharedViewModel: ViewModel() {
     fun getNameDriver(): LiveData<String>{
         return nameDriver
     }
-
 }
