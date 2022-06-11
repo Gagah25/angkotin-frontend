@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/fragment_maps"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="70dp"
-            android:layout_marginBottom="200dp"
-            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+            app:layout_constraintBottom_toTopOf="@+id/rl_set_lokasi"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_bar"
@@ -137,20 +137,30 @@
             app:iconGravity="textStart"
             app:iconPadding="@null"
             app:iconTint="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+            app:layout_constraintBottom_toTopOf="@+id/rl_set_lokasi"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
+        <include
+            android:id="@+id/popup_perjalanan"
+            layout="@layout/perjalanan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/rl_set_lokasi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rl_set_lokasi" />
+
         <RelativeLayout
-            android:id="@+id/relativeLayout"
+            android:id="@+id/rl_set_lokasi"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            android:background="@drawable/background_ubah_lokasi"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
+            android:background="@drawable/background_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintStart_toStartOf="parent">
 
             <TableLayout
@@ -224,7 +234,6 @@
                         android:layout_height="50dp"
                         android:layout_marginEnd="80dp"
                         android:layout_marginStart="80dp"
-                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/background_button_outline"
                         android:text="@string/ubah_lokasi"
@@ -247,7 +256,11 @@
                 </LinearLayout>
             </TableLayout>
 
+
         </RelativeLayout>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

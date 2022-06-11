@@ -10,6 +10,7 @@ import android.graphics.Canvas
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,6 +29,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.angkotin.R
 import com.example.angkotin.data.DataLocation
 import com.example.angkotin.data.UserPreference
@@ -330,6 +332,10 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         mDialogView.findViewById<Button>(R.id.button_batal).setOnClickListener {
             mAlertDialog.dismiss()
+        }
+        mDialogView.findViewById<Button>(R.id.button_naik).setOnClickListener {
+            mAlertDialog.dismiss()
+            binding.rlSetLokasi.visibility = View.INVISIBLE
         }
     }
 
