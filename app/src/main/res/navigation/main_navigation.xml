@@ -6,7 +6,7 @@
     app:startDestination="@id/mapFragment">
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.angkotin.fragment.fragmentMap.MapFragment"
+        android:name="com.angkotin.app.fragment.fragmentMap.MapFragment"
         android:label="MapFragment" >
         <action
             android:id="@+id/action_mapFragment_to_profilDriverFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/profilDriverFragment"
-        android:name="com.example.angkotin.fragment.fragmentProfilDriver.ProfilDriverFragment"
+        android:name="com.angkotin.app.fragment.fragmentProfilDriver.ProfilDriverFragment"
         android:label="fragment_profil_driver"
         tools:layout="@layout/fragment_profil_driver" >
         <action
@@ -26,12 +26,12 @@
     </fragment>
     <fragment
         android:id="@+id/ruteSpesifikFragment"
-        android:name="com.example.angkotin.fragment.fragmentRuteSpesifik.RuteSpesifikFragment"
+        android:name="com.angkotin.app.fragment.fragmentRuteSpesifik.RuteSpesifikFragment"
         android:label="fragment_rute_spesifik"
         tools:layout="@layout/fragment_rute_spesifik" />
     <fragment
         android:id="@+id/searchPageFragment"
-        android:name="com.example.angkotin.fragment.fragmentSearch.SearchPageFragment"
+        android:name="com.angkotin.app.fragment.fragmentSearch.SearchPageFragment"
         android:label="fragment_search_page"
         tools:layout="@layout/fragment_search_page" >
         <action
