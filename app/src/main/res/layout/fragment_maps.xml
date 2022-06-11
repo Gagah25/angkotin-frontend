@@ -118,6 +118,7 @@
             app:iconGravity="textStart"
             app:iconPadding="@null"
             app:iconTint="@color/neutral_800"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/button_back"
@@ -137,6 +138,7 @@
             app:iconGravity="textStart"
             app:iconPadding="@null"
             app:iconTint="@color/black"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/rl_set_lokasi"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -148,8 +150,10 @@
             layout="@layout/perjalanan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/rl_set_lokasi"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rl_set_lokasi" />
+            app:layout_constraintTop_toTopOf="@+id/rl_set_lokasi"
+            app:layout_constraintVertical_bias="1.0" />
 
         <RelativeLayout
             android:id="@+id/rl_set_lokasi"
@@ -158,7 +162,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
             android:visibility="visible"
-            android:background="@drawable/background_search"
+            android:background="@drawable/background_button_filter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
