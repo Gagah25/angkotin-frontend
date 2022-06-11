@@ -29,10 +29,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.angkotin.R
-import com.example.angkotin.databinding.FragmentMapsBinding
+import com.angkotin.app.R
 import com.angkotin.app.data.DataLocation
 import com.angkotin.app.data.UserPreference
+import com.angkotin.app.databinding.FragmentMapsBinding
 import com.angkotin.app.ui.HomeActivity
 import com.angkotin.app.ui.SettingActivity
 import com.angkotin.app.viewModel.AccountViewModel

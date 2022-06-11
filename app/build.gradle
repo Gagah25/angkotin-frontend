@@ -73,4 +73,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'androidx.fragment:fragment:1.4.1'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
+    implementation 'com.google.android.libraries.places:places:2.6.0'
+
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 }

@@ -12,6 +12,7 @@ import retrofit2.http.*
 object ApiConfig {
     private const val baseUrl = "https://angkotin-backend.herokuapp.com"
     private const val directionsUrl = "https://maps.googleapis.com"
+    private const val findPlacesUrl = "https://maps.googleapis.com"
 
     fun getApiService(): ApiInterface {
         val loggingInterceptor =
@@ -41,6 +42,21 @@ object ApiConfig {
             .client(client)
             .build()
         return retrofit.create(ApiDirectionService::class.java)
+    }
+
+    fun getApiFindPlacesService(): ApiFindPlacesService{
+        val loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(findPlacesUrl)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+        return retrofit.create(ApiFindPlacesService::class.java)
     }
 
 }
@@ -77,4 +93,13 @@ interface ApiDirectionService {
         @Query("mode") mode: String,
         @Query("key") key: String
     ): Call<DirectionsResponse>
+}
+
+interface ApiFindPlacesService {
+    @GET("/api/place/autocomplete/json")
+    fun getFindPlaces(
+        @Query("input") input : String,
+        @Query("types") types: String,
+        @Query("key") key: String
+    ): Call<FindPlacesResponse>
 }
