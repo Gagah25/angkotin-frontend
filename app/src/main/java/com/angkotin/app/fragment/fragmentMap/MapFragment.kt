@@ -12,14 +12,12 @@ import android.location.Geocoder
 import android.location.Location
 import android.opengl.Visibility
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.PopupMenu
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
@@ -46,10 +44,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import kotlinx.coroutines.Delay
 import java.util.*
+import kotlin.concurrent.timerTask
 
 class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-    private var _binding: FragmentMapsBinding? = null
+
+    private var _binding: com.angkotin.app.databinding.FragmentMapsBinding? = null
     private val binding get() = _binding!!
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -72,10 +73,16 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private var markerPassenger: Marker? = null
     private var driverName: String? = null
     private lateinit var nameToAlertDialog: String
+    private lateinit var pb: ProgressBar
+    private var counter: Int = 0
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
-        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?, ): View? {
+        _binding =
+            com.angkotin.app.databinding.FragmentMapsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -92,13 +99,20 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         idUser = "${sharedPref.fetchID()}"
         nameUser = "${sharedPref.fetchUserName()}"
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(AccountViewModel::class.java)
-        mapViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MapViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(AccountViewModel::class.java)
+        mapViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(MapViewModel::class.java)
         directionViewModel = ViewModelProvider(this).get(DirectionViewModel::class.java)
 
         mapViewModel.setDataFirebase()
 
-        val mapFragment = (childFragmentManager.findFragmentById(R.id.map_rute) as SupportMapFragment?)
+        val mapFragment =
+            (childFragmentManager.findFragmentById(R.id.map_rute) as SupportMapFragment?)
         mapFragment?.getMapAsync(this)
 
         binding.apply {
@@ -108,9 +122,9 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             /*POPUP MENU FILTER*/
             buttonFilter.setOnClickListener {
                 val popupMenu: PopupMenu = PopupMenu(requireContext(), buttonFilter)
-                popupMenu.menuInflater.inflate(R.menu.filter_options,popupMenu.menu)
+                popupMenu.menuInflater.inflate(R.menu.filter_options, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                    when(item.itemId) {
+                    when (item.itemId) {
                         R.id.trayek_gl -> buttonFilter.text = "GL"
                         R.id.trayek_ag -> buttonFilter.text = "AG"
                         R.id.trayek_agl -> buttonFilter.text = "AGL"
@@ -124,7 +138,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
-            buttonUbah.setOnClickListener {  }
+            buttonUbah.setOnClickListener { }
             buttonUbah.setOnClickListener { moveToSearchPage() }
         }
     }
@@ -150,9 +164,16 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13.5f))
 
-        directionViewModel.setDirectionMap(fromOrigin,toDestination,"driving",origin,destination,mMap)
+        directionViewModel.setDirectionMap(
+            fromOrigin,
+            toDestination,
+            "driving",
+            origin,
+            destination,
+            mMap
+        )
         //getMyLastLocation()
-        mapViewModel.getDataFirebase().observe(viewLifecycleOwner,{
+        mapViewModel.getDataFirebase().observe(viewLifecycleOwner, {
 
             for (angkot in mapViewModel.getDataFirebase().value!!) {
                 val dataLocation = LatLng(
@@ -161,7 +182,10 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                 )
                 if (angkot.role == "driver") {
                     driverName = angkot.name
-                    markerDriver = mMap.addMarker(MarkerOptions().position(dataLocation).title(driverName).icon(vectorToBitmap(R.drawable.direction_bus)))
+                    markerDriver = mMap.addMarker(
+                        MarkerOptions().position(dataLocation).title(driverName)
+                            .icon(vectorToBitmap(R.drawable.direction_bus))
+                    )
                     markerDriver?.tag = 0
 
                 } else if (angkot.role == "passanger") {
@@ -176,18 +200,17 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     }
 
 
-
-    private fun moveToHome(){
+    private fun moveToHome() {
         val intent = Intent(requireActivity(), HomeActivity::class.java)
         startActivity(intent)
     }
 
-    private fun moveToSetting(){
+    private fun moveToSetting() {
         val intent = Intent(requireActivity(), SettingActivity::class.java)
         startActivity(intent)
     }
 
-    private fun getData(data: DataLocation){
+    private fun getData(data: DataLocation) {
         viewModel.setDataLocation(token, idUser, data)
 
     }
@@ -214,6 +237,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                 }
             }
         }
+
     private fun checkPermission(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
             requireContext(),
@@ -234,7 +258,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                     Log.d("Lat", locationLat.toString())
                     Log.d("Long", locationLong.toString())
 
-                    address = geocoder.getFromLocation(locationLat, locationLong,1)
+                    address = geocoder.getFromLocation(locationLat, locationLong, 1)
 
                     val alamat: String = address.get(0).getAddressLine(0)
 
@@ -313,18 +337,20 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     }
 
     private fun dialogProfileDriver() {
-        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog_profile_driver, null)
+        val mDialogView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.custom_dialog_profile_driver, null)
         val mBuilder = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
             .setTitle("Profil Supir Angkot")
         val mAlertDialog = mBuilder.show()
         nameToAlertDialog = sharedViewModel.getNameDriver().value.toString()
 
-        mapViewModel.getDataFirebase().observe(viewLifecycleOwner,{
-            for (angkot in mapViewModel.getDataFirebase().value!!){
-                if (nameToAlertDialog == angkot.name){
+        mapViewModel.getDataFirebase().observe(viewLifecycleOwner, {
+            for (angkot in mapViewModel.getDataFirebase().value!!) {
+                if (nameToAlertDialog == angkot.name) {
                     mDialogView.findViewById<TextView>(R.id.user_detail).text = angkot.name
-                    mDialogView.findViewById<TextView>(R.id.tv_plat).text = angkot.driverMeta?.angkotNumber
+                    mDialogView.findViewById<TextView>(R.id.tv_plat).text =
+                        angkot.driverMeta?.angkotNumber
                 }
             }
         })
@@ -335,7 +361,25 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         mDialogView.findViewById<Button>(R.id.button_naik).setOnClickListener {
             mAlertDialog.dismiss()
             binding.rlSetLokasi.visibility = View.INVISIBLE
+            binding.buttonMyLocation.visibility = View.INVISIBLE
+            binding.buttonFilter.visibility = View.INVISIBLE
+            progress()
         }
+    }
+
+    private fun progress() {
+        pb = binding.popupPerjalanan.pb
+        val t = Timer()
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                counter++
+                pb.setProgress(counter)
+                if(counter ==100){
+                    t.cancel()
+                    //binding.popupPerjalanan.tvInfo.setText("Angkot sudah sampai, ayo naik sekarang")
+                }
+            }
+        }, 1000,100)
     }
 
     companion object{
