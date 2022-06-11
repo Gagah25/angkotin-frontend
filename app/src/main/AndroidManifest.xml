@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.angkotin">
+    package="com.angkotin.app">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -14,16 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Angkotin">
         <activity
-            android:name=".ui.DaftarActivity"
+            android:name="com.angkotin.app.ui.DaftarActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.HomeActivity"
+            android:name="com.angkotin.app.ui.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="com.angkotin.app.ui.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.angkotin.app.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,19 +32,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MapsActivity"
+            android:name="com.angkotin.app.ui.MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.BantuanActivity"
+            android:name="com.angkotin.app.ui.BantuanActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.RouteAngkotActivity"
+            android:name="com.angkotin.app.ui.RouteAngkotActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DetailRouteAngkotActivity"
+            android:name="com.angkotin.app.ui.DetailRouteAngkotActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.SettingActivity"
+            android:name="com.angkotin.app.ui.SettingActivity"
             android:exported="false" />
 
         <meta-data
