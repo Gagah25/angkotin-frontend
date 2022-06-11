@@ -10,9 +10,7 @@ import android.graphics.Canvas
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import android.opengl.Visibility
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +26,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.angkotin.app.R
+import com.angkotin.app.SelesaiActivity
 import com.angkotin.app.data.DataLocation
 import com.angkotin.app.data.UserPreference
 import com.angkotin.app.ui.HomeActivity
@@ -43,9 +42,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import kotlinx.coroutines.Delay
 import java.util.*
-import kotlin.concurrent.timerTask
 
 class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -137,8 +134,22 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
             buttonSetting.setOnClickListener { moveToSetting() }
             buttonMyLocation.setOnClickListener { getMyLastLocation() }
-            buttonUbah.setOnClickListener { }
             buttonUbah.setOnClickListener { moveToSearchPage() }
+            popupPerjalanan.buttonTurun.setOnClickListener { moveToSelesai() }
+
+            popupPerjalanan.buttonNaik.setOnClickListener {
+                binding.popupPerjalanan.tvInfo.text = "Angkot sedang mengantarmu"
+                binding.popupPerjalanan.buttonTurun.visibility = View.VISIBLE
+                binding.popupPerjalanan.buttonNaik.visibility = View.GONE
+                binding.popupPerjalanan.igPin.visibility = View.GONE
+                binding.popupPerjalanan.igDotBlue.visibility = View.GONE
+                binding.popupPerjalanan.pb.visibility = View.GONE
+                binding.popupPerjalanan.igDotJalan.visibility = View.VISIBLE
+                binding.popupPerjalanan.igDotMenuju.visibility = View.VISIBLE
+                binding.popupPerjalanan.tvJalan.visibility = View.VISIBLE
+                binding.popupPerjalanan.tvMenuju.visibility = View.VISIBLE
+            }
+
         }
     }
 
@@ -198,6 +209,10 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
 
+    private fun moveToSelesai() {
+        val intent = Intent(requireContext(), SelesaiActivity::class.java)
+        startActivity(intent)
+    }
 
     private fun moveToHome() {
         val intent = Intent(requireActivity(), HomeActivity::class.java)
@@ -374,12 +389,17 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                 counter++
                 pb.setProgress(counter)
                 if(counter ==100){
-                    t.cancel()
-                    //binding.popupPerjalanan.tvInfo.setText("Angkot sudah sampai, ayo naik sekarang")
+                    activity?.runOnUiThread{
+                        binding.popupPerjalanan.buttonNaik.visibility = View.VISIBLE
+                        binding.popupPerjalanan.tvInfo.text = "Angkot sudah sampai, ayo naik sekarang"
+                        t.cancel()
+                    }
                 }
             }
         }, 1000,100)
     }
+
+
 
     companion object{
         const val EXTRA_NAME = "Extra_Name"
