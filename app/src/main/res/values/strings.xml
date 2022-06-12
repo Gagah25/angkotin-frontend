@@ -58,5 +58,12 @@
     <string name="batal">Batal</string>
     <string name="sub_info_menunggu">Harap menunggu, Angkot sedang menuju ke lokasimu.</string>
     <string name="find_place">Cari Lokasi</string>
+    <string name="sub_penumpang_naik">Angkot sudah sampai, ayo naik sekarang</string>
+    <string name="turun">Turun</string>
+    <string name="jl_patimura">Jl. Patimura</string>
+    <string name="jl_trunojoyo">Jl. Trunojoyo</string>
+    <string name="terimakasih">Terimakasih telah menggunakan Angkotin teman perjalanan kamu</string>
+    <string name="keluar">Keluar</string>
+    <string name="kembali_ke_home">Kembali ke Home</string>
 
 </resources>

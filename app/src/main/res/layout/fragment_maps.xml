@@ -153,7 +153,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rl_set_lokasi"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:visibility="visible"/>
+
+<!--        <include-->
+<!--            android:id="popup_naik"-->
+<!--            layout="@layout/penumpang_naik"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/popup_perjalanan"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/popup_perjalanan"-->
+<!--            app:layout_constraintStart_toStartOf="@id/popup_perjalanan"-->
+<!--            app:layout_constraintTop_toTopOf="@id/popup_perjalanan" />-->
+
+
 
         <RelativeLayout
             android:id="@+id/rl_set_lokasi"
