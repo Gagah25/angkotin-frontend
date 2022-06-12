@@ -30,11 +30,13 @@ class MapViewModel: ViewModel() {
                         val longitude = angkot.location?.longitude
                         val angkotNumber = angkot.driverMeta?.angkotNumber
                         val isActive = angkot.driverMeta?.isActive
+                        val angkotLabel = angkot.driverMeta?.angkotLabel
                         driverList.add(
                             DriverResponse(
                                 driverMeta = DriverData(
                                     angkotNumber = angkotNumber,
-                                    isActive = isActive
+                                    isActive = isActive,
+                                    angkotLabel = angkotLabel
                                 ),
                                 location = DriverLocation(
                                     latitude = latitude,

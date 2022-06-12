@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class FindPlacesResponse(
 
 	@field:SerializedName("predictions")
-	val predictions: List<PredictionsItem?>? = null,
+	val predictions: ArrayList<PredictionsItem?>? = null ,
 
 	@field:SerializedName("status")
 	val status: String? = null

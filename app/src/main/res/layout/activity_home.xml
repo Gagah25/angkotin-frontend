@@ -89,4 +89,13 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_welcome"
         app:layout_constraintStart_toEndOf="@+id/btn_bantuan"
         app:layout_constraintTop_toTopOf="@+id/btn_bantuan" />
+
+    <TextView
+        android:id="@+id/coba_estimasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/btn_akunku"
+        app:layout_constraintStart_toStartOf="@+id/btn_bantuan"
+        tools:layout_editor_absoluteY="583dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

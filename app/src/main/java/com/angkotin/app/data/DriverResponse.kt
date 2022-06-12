@@ -26,6 +26,9 @@ data class DriverData(
     @field:SerializedName("createdAt")
     val angkotNumber: String? = null,
 
+    @field:SerializedName("angkotLabel")
+    val angkotLabel: String? = null,
+
     @field:SerializedName("isActive")
     val isActive: Boolean? = null
 )

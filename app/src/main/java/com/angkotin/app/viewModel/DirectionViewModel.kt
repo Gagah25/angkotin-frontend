@@ -54,7 +54,7 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
                             for (j in legs?.indices!!){
                                 var steps: List<StepsItem?>? = legs.get(j)?.steps
                                 var distanceAPI = legs[j]?.distance?.text?.take(4)?.toDouble()
-                                Log.d("Jarak", distanceAPI.toString())
+                                //Log.d("Jarak", distanceAPI.toString())
 
                                 for (k in steps?.indices!!){
                                     var polyLine: String? = steps.get(k)?.polyline?.points
@@ -72,16 +72,17 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
                         polyLineOptions?.color(ContextCompat.getColor(context , R.color.blue_400))
                     }
                     mMap?.addPolyline(polyLineOptions!!)
-                    mMap?.addMarker(MarkerOptions().position(origin).title("Marker 1"))
-                    mMap?.addMarker(MarkerOptions().position(destination).title("Marker 2"))
+                    mMap?.addMarker(MarkerOptions().position(origin).title("Marker 1"))?.tag = 1
+                    mMap?.addMarker(MarkerOptions().position(destination).title("Marker 2"))?.tag = 1
 
-                    val bounds = LatLngBounds.Builder()
-                        .include(origin)
-                        .include(destination).build()
-                    val point = Point()
-                    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-                    windowManager?.defaultDisplay?.getSize(point)
-                    mMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, point.x, 150, 30))
+
+//                    val bounds = LatLngBounds.Builder()
+//                        .include(origin)
+//                        .include(destination).build()
+//                    val point = Point()
+//                    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+//                    windowManager?.defaultDisplay?.getSize(point)
+//                    mMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, point.x, 150, 30))
                 }
             }
 

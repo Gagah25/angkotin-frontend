@@ -29,14 +29,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.angkotin.app.R
 import com.angkotin.app.data.DataLocation
+import com.angkotin.app.data.LatLngTrayekAngkot
+import com.angkotin.app.data.Trayek
 import com.angkotin.app.data.UserPreference
 import com.angkotin.app.databinding.FragmentMapsBinding
 import com.angkotin.app.ui.HomeActivity
 import com.angkotin.app.ui.SettingActivity
-import com.angkotin.app.viewModel.AccountViewModel
-import com.angkotin.app.viewModel.DirectionViewModel
-import com.angkotin.app.viewModel.MapViewModel
-import com.angkotin.app.viewModel.SharedViewModel
+import com.angkotin.app.viewModel.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -50,7 +49,7 @@ import kotlin.concurrent.timerTask
 
 class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    private var _binding: com.angkotin.app.databinding.FragmentMapsBinding? = null
+    private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -58,6 +57,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var viewModel: AccountViewModel
     private lateinit var mapViewModel: MapViewModel
     private lateinit var directionViewModel: DirectionViewModel
+    private lateinit var geocodingViewModel: GeocodingViewModel
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var sharedPref: UserPreference
     private lateinit var address: MutableList<Address>
@@ -65,6 +65,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var idUser: String
     private lateinit var nameUser: String
     private lateinit var passREsponse: DataLocation
+    private lateinit var trayek: LatLngTrayekAngkot
     private var locationLong: Double = 0.0
     private var locationLat: Double = 0.0
     private lateinit var dialogBuilder: AlertDialog.Builder
@@ -76,21 +77,23 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var pb: ProgressBar
     private var counter: Int = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?, ): View? {
         _binding =
-            com.angkotin.app.databinding.FragmentMapsBinding.inflate(inflater, container, false)
+            FragmentMapsBinding.inflate(inflater, container, false)
         val view = binding.root
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        klikAngkotDialog()
 
         passREsponse = DataLocation()
+        trayek = LatLngTrayekAngkot()
 
         fusedLocationClient = FusedLocationProviderClient(requireActivity())
         geocoder = Geocoder(requireActivity(), Locale.getDefault())
@@ -124,13 +127,60 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                 val popupMenu: PopupMenu = PopupMenu(requireContext(), buttonFilter)
                 popupMenu.menuInflater.inflate(R.menu.filter_options, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                var angkotLabel = ""
                     when (item.itemId) {
-                        R.id.trayek_gl -> buttonFilter.text = "GL"
-                        R.id.trayek_ag -> buttonFilter.text = "AG"
-                        R.id.trayek_agl -> buttonFilter.text = "AGL"
-                        R.id.trayek_ldg -> buttonFilter.text = "LDG"
-                        R.id.trayek_gm -> buttonFilter.text = "GM"
+                        //R.id.trayek_gl -> buttonFilter.text = "GL"
+                        R.id.trayek_gl -> {
+                            mMap.clear()
+                            buttonFilter.text = item.title
+                            angkotLabel = "GL"
+                        }
+                        R.id.trayek_ag -> {
+                            mMap.clear()
+                            buttonFilter.text = item.title
+                            angkotLabel = "AG"
+                        }
+                        R.id.trayek_adl -> {
+                            mMap.clear()
+                            buttonFilter.text = item.title
+                            angkotLabel = "ADL"
+                        }
+                        R.id.trayek_ldg -> {
+                            mMap.clear()
+                            buttonFilter.text = item.title
+                            angkotLabel = "LDG"
+                        }
+                        R.id.trayek_gm -> {
+                            mMap.clear()
+                            buttonFilter.text = item.title
+                            angkotLabel = "GM"
+                        }
                     }
+                    directionViewModel.setDirectionMap(
+                        trayek.angkotList[angkotLabel]?.fromOrigin!!,
+                        trayek.angkotList[angkotLabel]?.toDestination!!,
+                        "driving",
+                        trayek.angkotList[angkotLabel]?.origin!!,
+                        trayek.angkotList[angkotLabel]?.destination!!,
+                        mMap
+                    )
+                    mapViewModel.getDataFirebase().observe(viewLifecycleOwner, {
+                        for (angkot in mapViewModel.getDataFirebase().value!!) {
+                            val dataLocation = LatLng(
+                                angkot.location?.latitude!!,
+                                angkot.location?.longitude!!
+                            )
+                            if (angkot.role == "driver" && angkot?.driverMeta?.angkotLabel == angkotLabel) {
+                                driverName = angkot.name
+                                markerDriver = mMap.addMarker(
+                                    MarkerOptions().position(dataLocation).title(driverName)
+                                        .icon(vectorToBitmap(R.drawable.direction_bus))
+                                )
+                                markerDriver?.tag = 0
+
+                            }
+                        }
+                    })
                     true
                 })
                 popupMenu.show()
@@ -141,37 +191,19 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             buttonUbah.setOnClickListener { }
             buttonUbah.setOnClickListener { moveToSearchPage() }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        klikAngkotDialog()
+        Log.d("PlaceId", sharedViewModel.getPlaceId().toString())
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
-        mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
         val kotaMalang = LatLng(-7.982929, 112.631333)
-        val origin = LatLng(-7.9332112970817095, 112.65815130110964)
-        val destination = LatLng(-8.022991852006383, 112.62826139250069)
 
-        val fromOrigin = origin.latitude.toString() + "," + origin.longitude.toString()
-        val toDestination = destination.latitude.toString() + "," + destination.longitude.toString()
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13f))
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13.5f))
-
-        directionViewModel.setDirectionMap(
-            fromOrigin,
-            toDestination,
-            "driving",
-            origin,
-            destination,
-            mMap
-        )
         //getMyLastLocation()
         mapViewModel.getDataFirebase().observe(viewLifecycleOwner, {
 
@@ -190,7 +222,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
                 } else if (angkot.role == "passanger") {
                     markerPassenger = mMap.addMarker(MarkerOptions().position(dataLocation))
-                    markerPassenger?.tag = 0
+                    markerPassenger?.tag = 1
                 }
                 mMap.setOnMarkerClickListener(this)
             }
@@ -384,5 +416,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
     companion object{
         const val EXTRA_NAME = "Extra_Name"
+        const val FRAGMENT = "Fragment"
+        const val KEY_ADAPTER_STATE = "com.angkotin.app.fragment.fragmentMap.MapFragment.KEY_ADAPTER_STATE"
     }
 }

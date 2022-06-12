@@ -22,7 +22,6 @@ class LoginViewModel: ViewModel() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     userLogin.postValue(response.body())
-
                 }
             }
 

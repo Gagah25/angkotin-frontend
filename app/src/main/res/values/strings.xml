@@ -57,5 +57,6 @@
     <string name="pilih_di_peta">Pilih di peta</string>
     <string name="batal">Batal</string>
     <string name="sub_info_menunggu">Harap menunggu, Angkot sedang menuju ke lokasimu.</string>
+    <string name="find_place">Cari Lokasi</string>
 
 </resources>
