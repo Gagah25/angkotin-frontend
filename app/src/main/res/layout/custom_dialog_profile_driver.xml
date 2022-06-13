@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:textColor="@color/black"
@@ -40,12 +41,14 @@
 
         <TextView
             style="@style/Body_4_Open_Regular"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/nomor_plat" />
 
         <TextView
             style="@style/Body_4_Open_Regular"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -54,6 +57,7 @@
 
         <TextView
             style="@style/Body_4_Open_Regular"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tujuan_akhir" />
@@ -71,12 +75,15 @@
         <TextView
             android:id="@+id/tv_plat"
             style="@style/Body_3_Medium"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="N 1234 AB" />
 
         <TextView
+            android:id="@+id/tv_kode_angkot"
             style="@style/Body_3_Medium"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -85,6 +92,7 @@
 
         <TextView
             style="@style/Body_3_Medium"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Landungsari" />
@@ -101,6 +109,7 @@
 
         <TextView
             style="@style/Body_4_Open_Regular"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
@@ -108,6 +117,7 @@
 
         <TextView
             style="@style/Body_4_Open_Regular"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/estimasi_waktu" />
@@ -124,6 +134,7 @@
 
         <TextView
             style="@style/Body_3_Medium"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"
@@ -131,6 +142,7 @@
 
         <TextView
             style="@style/Body_3_Medium"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="12 Menit" />

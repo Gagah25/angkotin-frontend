@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.angkotin.app.ApiConfig
-import com.angkotin.app.BuildConfig
 import com.angkotin.app.BuildConfig.MAPS_API_KEY
 import com.angkotin.app.data.GeocodingResponse
-import com.angkotin.app.data.Geometry
 import com.angkotin.app.data.Location
 import com.angkotin.app.data.ResultsItem
 import retrofit2.Call

@@ -1,6 +1,7 @@
 package com.angkotin.app.ui
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ class RouteAngkotActivity: AppCompatActivity(), RouteAdapter.OnMoveClickListener
         super.onCreate(savedInstanceState)
         binding = RuteAngkotMalangBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         binding.rvRuteAngkot.setHasFixedSize(true)
 

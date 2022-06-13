@@ -1,6 +1,7 @@
 package com.angkotin.app.ui
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var accountViewModel: AccountViewModel
     private lateinit var nomorHpL: String
     private lateinit var passL: String
-    private lateinit var err: String
+    private lateinit var sucss: String
     private lateinit var sharedPref: UserPreference
     private lateinit var tkn: String
     private lateinit var idUser: String
@@ -37,6 +38,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         sharedPref = UserPreference(this)
 
@@ -86,11 +88,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         loginViewModel.getLogin().observe(this, {
             if (it != null) {
                 with(it) {
-                    err = success.toString()
-                    Log.d("Error message", err)
+                    sucss = success.toString()
+                    Log.d("Error message", sucss)
                 }
             }
-            if (err == "true") {
+            if (sucss == "true") {
                 Toast.makeText(this, "Anda berhasil Masuk\nTunggu Sebentar", Toast.LENGTH_SHORT).show()
                 CoroutineScope(Dispatchers.Main).launch {
                     getData()

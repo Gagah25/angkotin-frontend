@@ -1,37 +1,29 @@
 package com.angkotin.app.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.angkotin.app.data.UserPreference
 import com.angkotin.app.databinding.ActivityHomeBinding
-import com.angkotin.app.viewModel.EstimationViewModel
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var sharedPref: UserPreference
-    private lateinit var viewModel: EstimationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         sharedPref = UserPreference(this)
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(EstimationViewModel::class.java)
-
-        viewModel.setEstimation()
-        viewModel.getEstimations().observe(this,{
-            Log.d("Gatel", it.toString())
-            binding.cobaEstimasi.text = it?.toInt().toString()
-        })
+        val username = sharedPref.fetchUserName()
 
         binding.apply {
-
-            tvGreet.text = "Halo ${sharedPref.fetchUserName()}"
+            binding.tvGreet.text = "Hello " +  username
             btnCariAngkot.setOnClickListener{ moveToCariAngkot() }
             btnRuteAngkot.setOnClickListener { moveToRuteAngkot() }
             btnBantuan.setOnClickListener { moveToBantuan() }

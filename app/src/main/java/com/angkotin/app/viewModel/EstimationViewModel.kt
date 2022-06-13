@@ -7,19 +7,12 @@ import androidx.lifecycle.ViewModel
 import com.angkotin.app.ApiConfig
 import com.angkotin.app.data.DataML
 import com.angkotin.app.data.MachineLearnigResponse
-import com.angkotin.app.data.SendRequestToML
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.gson.JsonParser
-import org.json.JSONObject
-import org.xml.sax.Parser
 import retrofit2.Call
 import retrofit2.Response
-import javax.crypto.Mac
 
 
 class EstimationViewModel: ViewModel() {
     val _estimation = MutableLiveData<Double?>()
-    val estimation = _estimation
     private lateinit var dataML: DataML
 
     fun setEstimation(){

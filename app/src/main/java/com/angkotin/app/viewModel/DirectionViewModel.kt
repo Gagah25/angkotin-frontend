@@ -1,10 +1,6 @@
 package com.angkotin.app.viewModel
 
 import android.app.Application
-import android.content.Context
-import android.graphics.Point
-import android.util.Log
-import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -16,10 +12,8 @@ import com.angkotin.app.data.DirectionsResponse
 import com.angkotin.app.data.LegsItem
 import com.angkotin.app.data.RoutesItem
 import com.angkotin.app.data.StepsItem
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
@@ -74,15 +68,6 @@ class DirectionViewModel(application: Application) : AndroidViewModel(applicatio
                     mMap?.addPolyline(polyLineOptions!!)
                     mMap?.addMarker(MarkerOptions().position(origin).title("Marker 1"))?.tag = 1
                     mMap?.addMarker(MarkerOptions().position(destination).title("Marker 2"))?.tag = 1
-
-
-//                    val bounds = LatLngBounds.Builder()
-//                        .include(origin)
-//                        .include(destination).build()
-//                    val point = Point()
-//                    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-//                    windowManager?.defaultDisplay?.getSize(point)
-//                    mMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, point.x, 150, 30))
                 }
             }
 

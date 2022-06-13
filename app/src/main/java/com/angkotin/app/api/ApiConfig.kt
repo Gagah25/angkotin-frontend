@@ -1,11 +1,8 @@
 package com.angkotin.app
 
 import com.angkotin.app.data.*
-import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,6 +1,7 @@
 package com.angkotin.app.ui
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -20,6 +21,7 @@ class SettingActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = NavigasiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         sharedPref = UserPreference(this)
         val name = "${sharedPref.fetchUserName()}"

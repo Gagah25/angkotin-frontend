@@ -26,10 +26,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.angkotin.app.R
-import com.angkotin.app.SelesaiActivity
+import com.angkotin.app.ui.SelesaiActivity
 import com.angkotin.app.data.DataLocation
 import com.angkotin.app.data.LatLngTrayekAngkot
-import com.angkotin.app.data.Trayek
 import com.angkotin.app.data.UserPreference
 import com.angkotin.app.databinding.FragmentMapsBinding
 import com.angkotin.app.ui.HomeActivity
@@ -54,7 +53,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var viewModel: AccountViewModel
     private lateinit var mapViewModel: MapViewModel
     private lateinit var directionViewModel: DirectionViewModel
-    private lateinit var geocodingViewModel: GeocodingViewModel
+    private lateinit var estimationViewModel: EstimationViewModel
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var sharedPref: UserPreference
     private lateinit var address: MutableList<Address>
@@ -73,6 +72,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private lateinit var nameToAlertDialog: String
     private lateinit var pb: ProgressBar
     private var counter: Int = 0
+    private var angkotLabel = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -108,6 +108,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             ViewModelProvider.NewInstanceFactory()
         ).get(MapViewModel::class.java)
         directionViewModel = ViewModelProvider(this).get(DirectionViewModel::class.java)
+        estimationViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(EstimationViewModel::class.java)
 
         mapViewModel.setDataFirebase()
 
@@ -124,9 +125,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                 val popupMenu: PopupMenu = PopupMenu(requireContext(), buttonFilter)
                 popupMenu.menuInflater.inflate(R.menu.filter_options, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                var angkotLabel = ""
                     when (item.itemId) {
-                        //R.id.trayek_gl -> buttonFilter.text = "GL"
                         R.id.trayek_gl -> {
                             mMap.clear()
                             buttonFilter.text = item.title
@@ -174,7 +173,9 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
                                         .icon(vectorToBitmap(R.drawable.direction_bus))
                                 )
                                 markerDriver?.tag = 0
-
+                            }else if (angkot.role == "passanger") {
+                                markerPassenger = mMap.addMarker(MarkerOptions().position(dataLocation))
+                                markerPassenger?.tag = 1
                             }
                         }
                     })
@@ -215,7 +216,6 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kotaMalang, 13f))
 
-        //getMyLastLocation()
         mapViewModel.getDataFirebase().observe(viewLifecycleOwner, {
 
             for (angkot in mapViewModel.getDataFirebase().value!!) {
@@ -396,8 +396,8 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
             for (angkot in mapViewModel.getDataFirebase().value!!) {
                 if (nameToAlertDialog == angkot.name) {
                     mDialogView.findViewById<TextView>(R.id.user_detail).text = angkot.name
-                    mDialogView.findViewById<TextView>(R.id.tv_plat).text =
-                        angkot.driverMeta?.angkotNumber
+                    mDialogView.findViewById<TextView>(R.id.tv_plat).text = angkot.driverMeta?.angkotNumber
+                    mDialogView.findViewById<TextView>(R.id.tv_kode_angkot).text = angkot.driverMeta?.angkotLabel
                 }
             }
         })
@@ -417,12 +417,22 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
     private fun progress() {
         pb = binding.popupPerjalanan.pb
         val t = Timer()
+        var estimation: String = ""
+        estimationViewModel.setEstimation()
+        estimationViewModel.getEstimations().observe(viewLifecycleOwner, {
+            if (it != null){
+                estimation = it.toInt().toString() + "Menit"
+                binding.popupPerjalanan.tvEstimasi.text = estimation
+            }
+        })
+        //binding.popupPerjalanan.tvEstimasi.text =
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 counter++
                 pb.setProgress(counter)
                 if(counter ==100){
                     activity?.runOnUiThread{
+                        binding.popupPerjalanan.tvEstimasi.visibility = View.GONE
                         binding.popupPerjalanan.buttonNaik.visibility = View.VISIBLE
                         binding.popupPerjalanan.tvInfo.text = "Angkot sudah sampai, ayo naik sekarang"
                         t.cancel()
@@ -436,7 +446,5 @@ class MapFragment: Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListen
 
     companion object{
         const val EXTRA_NAME = "Extra_Name"
-        const val FRAGMENT = "Fragment"
-        const val KEY_ADAPTER_STATE = "com.angkotin.app.fragment.fragmentMap.MapFragment.KEY_ADAPTER_STATE"
     }
 }

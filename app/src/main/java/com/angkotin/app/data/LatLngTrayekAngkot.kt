@@ -2,19 +2,6 @@ package com.angkotin.app.data
 
 import com.google.android.gms.maps.model.LatLng
 
-//data class LatLngTrayekAngkot(
-//    val trayekAG: TrayekAG
-//)
-//
-//data class TrayekAG(
-//    val origin: LatLng = La
-//)
-
-data class LatLang(
-    val latitude: Double,
-    val longitude: Double,
-)
-
 class Trayek constructor(origin: LatLng, destination: LatLng) {
     val origin: LatLng = origin
     val destination: LatLng = destination

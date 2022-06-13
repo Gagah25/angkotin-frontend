@@ -10,10 +10,6 @@ data class MachineLearnigResponse(
     var data: dataRequest
 )
 
-data class SendRequestToML(
-    @field:SerializedName("instances")
-    var instances: DataML? = null
-)
 
 data class dataRequest(
     @field:SerializedName("predictions")

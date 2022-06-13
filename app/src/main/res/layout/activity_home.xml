@@ -6,16 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_angkotin"
+        app:layout_constraintBottom_toTopOf="@+id/tv_greet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
     <TextView
         android:id="@+id/tv_greet"
         style="@style/Body_1_Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/greet"/>
+        tools:text="@string/greet" />
 
     <TextView
         android:id="@+id/tv_welcome"
@@ -90,12 +100,4 @@
         app:layout_constraintStart_toEndOf="@+id/btn_bantuan"
         app:layout_constraintTop_toTopOf="@+id/btn_bantuan" />
 
-    <TextView
-        android:id="@+id/coba_estimasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/btn_akunku"
-        app:layout_constraintStart_toStartOf="@+id/btn_bantuan"
-        tools:layout_editor_absoluteY="583dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

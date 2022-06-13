@@ -1,5 +1,6 @@
 package com.angkotin.app.ui
 
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
@@ -24,6 +25,7 @@ class DaftarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDaftarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
 

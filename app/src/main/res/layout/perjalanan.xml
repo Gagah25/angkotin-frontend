@@ -102,16 +102,31 @@
             android:visibility="visible"/>
 
         <TextView
-            android:id="@+id/tv_info"
+            android:id="@+id/tv_estimasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sub_info_menunggu"
+            android:textColor="@color/black"
+            style="@style/Body_3_Medium"
+            app:layout_constraintBottom_toTopOf="@+id/tv_info"
+            app:layout_constraintEnd_toEndOf="@+id/ig_pin"
+            app:layout_constraintStart_toStartOf="@+id/ig_dot_blue"
+            app:layout_constraintTop_toBottomOf="@+id/pb"
+            tools:text="14 Menit" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            style="@style/Caption_Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:text="@string/sub_info_menunggu"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/ig_pin"
             app:layout_constraintStart_toStartOf="@+id/ig_dot_blue"
-            app:layout_constraintTop_toBottomOf="@+id/pb" />
+            app:layout_constraintTop_toBottomOf="@+id/pb"
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/button_naik"

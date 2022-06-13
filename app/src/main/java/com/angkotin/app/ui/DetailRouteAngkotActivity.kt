@@ -1,5 +1,6 @@
 package com.angkotin.app.ui
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ class DetailRouteAngkotActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DetailRuteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         val detailRoute = intent.getStringExtra(Extra_Routes)
         binding.rute.text = detailRoute
